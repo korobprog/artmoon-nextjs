@@ -73,7 +73,7 @@ export function CallbackForm() {
       {/* Фиксированная кнопка вызова формы */}
       <button
         onClick={toggleForm}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105 z-50"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105 z-50 hover:cursor-pointer"
         aria-label="Открыть форму обратного звонка"
       >
         <svg
