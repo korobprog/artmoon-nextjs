@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import './globals.css';
 import HomePage from '@/components/HomePage';
 import Gallery from '@/components/Gallery';
+import { CallbackForm } from '@/components/CallbackForm';
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Navbar />
       <HomePage />
       <Gallery />
+      <CallbackForm />
     </>
   );
 }
