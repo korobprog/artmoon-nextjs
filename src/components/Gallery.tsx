@@ -29,7 +29,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2275',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2275-95х75см_-1500x1189.webp',
   },
   {
@@ -37,7 +37,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2276',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2276-95х75см-1500x1194.webp',
   },
   {
@@ -45,7 +45,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2277',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2277-95х75см-1500x1192.webp',
   },
   {
@@ -53,7 +53,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2279',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2279-95х75см_-1500x1181.webp',
   },
   {
@@ -61,7 +61,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2280',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2280-95х75см-1500x1180.webp',
   },
   {
@@ -69,7 +69,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2281',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2281-95х75см-1500x1190.webp',
   },
   {
@@ -77,7 +77,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2262',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2262-95х75см-1-1500x1186.webp',
   },
   {
@@ -85,7 +85,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2263',
     author: 'Армандо Романо (Италия)',
     size: '95х75см',
-    price: '252 000 р.',
+    price: '252 000  ',
     url: '/images/Армандо-Романо-Италия-2263-95х75см-1500x1184.webp',
   },
   {
@@ -93,7 +93,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2265',
     author: 'Армандо Романо (Италия)',
     size: '115х85см',
-    price: '357 000 р.',
+    price: '357 000  ',
     url: '/images/Армандо-Романо-Италия-2265-115х85см-1500x1112.webp',
   },
   {
@@ -101,7 +101,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2266',
     author: 'Армандо Романо (Италия)',
     size: '145х85см',
-    price: '470 000 р.',
+    price: '470 000  ',
     url: '/images/Армандо-Романо-Италия-2266-145х85см-1500x883.webp',
   },
   {
@@ -109,7 +109,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2282',
     author: 'Наварро Монтллор (Испания)',
     size: '145х115см',
-    price: '2 190 000 р.',
+    price: '2 190 000  ',
     url: '/images/Наварро-Монтллор-Испания-2282-145х115см.webp',
   },
   {
@@ -117,7 +117,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2305',
     author: 'Мартина Йона (Испания)',
     size: '86х75см',
-    price: '270 000 р.',
+    price: '270 000  ',
     url: '/images/Мартина-Йона-Испания-2305-86х75см-1500x1315.webp',
   },
   {
@@ -125,7 +125,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2304',
     author: 'Мартина Йона (Испания)',
     size: '98х84см',
-    price: '380 000 р.',
+    price: '380 000  ',
     url: '/images/Мартина-Йона-Испания-2304-98х84см-1500x1294.webp',
   },
   {
@@ -133,7 +133,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2302',
     author: 'Мартина Йона (Испания)',
     size: '80х70см',
-    price: '270 000 р.',
+    price: '270 000  ',
     url: '/images/Мартина-Йона-Испания-2302-80х70см-1500x1330.webp',
   },
   {
@@ -141,7 +141,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2300',
     author: 'Мартина Йона (Испания)',
     size: '71х80см',
-    price: '270 000 р.',
+    price: '270 000  ',
     url: '/images/Мартина-Йона-Испания-2300-71х80см-1323x1500.webp',
   },
   {
@@ -149,7 +149,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2259',
     author: 'Мартина Йона (Испания)',
     size: '98х85см',
-    price: '390 000 р.',
+    price: '390 000  ',
     url: '/images/Мартина-Йона-Испания-2259-98х85см-1500x1301.webp',
   },
   {
@@ -157,7 +157,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2260',
     author: 'Мартина Йона (Испания)',
     size: '98х85см',
-    price: '390 000 р.',
+    price: '390 000  ',
     url: '/images/Мартина-Йона-Испания-2260-98х85см-1500x1299.webp',
   },
   {
@@ -165,7 +165,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2309',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '584 000 р.',
+    price: '584 000  ',
     url: '/images/Хавьер-Мулио-Испания-2309-45х55см.webp',
   },
   {
@@ -173,7 +173,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2307',
     author: 'Хавьер Мулио (Испания)',
     size: '106х85см',
-    price: '2 124 000 р.',
+    price: '2 124 000  ',
     url: '/images/Хавьер-Мулио-Испания-____-106х85см.webp',
   },
   {
@@ -181,7 +181,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2288',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '567 000 р.',
+    price: '567 000  ',
     url: '/images/Хавьер-Мулио-Испания-2288-45х55см.webp',
   },
   {
@@ -189,7 +189,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2285',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '584 000 р.',
+    price: '584 000  ',
     url: '/images/Хавьер-Мулио-Испания-2285-45х55см.webp',
   },
   {
@@ -197,7 +197,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2286',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '567 000 р.',
+    price: '567 000  ',
     url: '/images/Хавьер-Мулио-Испания-2286-45х55см.webp',
   },
   {
@@ -205,7 +205,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2287',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '584 000 р.',
+    price: '584 000  ',
     url: '/images/Хавьер-Мулио-Испания-2287-45х55см.webp',
   },
   {
@@ -213,7 +213,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2289',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '584 000 р.',
+    price: '584 000  ',
     url: '/images/Хавьер-Мулио-Испания-2289-45х55см.webp',
   },
   {
@@ -221,7 +221,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2290',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '584 000 р.',
+    price: '584 000  ',
     url: '/images/Хавьер-Мулио-Испания-2290-45х55см.webp',
   },
   {
@@ -229,7 +229,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2291',
     author: 'Хавьер Мулио (Испания)',
     size: '45х55см',
-    price: '567 000 р.',
+    price: '567 000  ',
     url: '/images/Хавьер-Мулио-Испания-2291-45х55см.webp',
   },
   {
@@ -237,7 +237,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2271',
     author: 'Хавьер Мулио (Испания)',
     size: '63х75см',
-    price: '1 656 000 р.',
+    price: '1 656 000  ',
     url: '/images/Хавьер-Мулио-Испания-2271-63х75см-1268x1500.webp',
   },
   {
@@ -245,7 +245,7 @@ const artworks: Artwork[] = [
     title: 'Картина №2273',
     author: 'Хавьер Мулио (Испания)',
     size: '106х85см',
-    price: '2 124 000 р.',
+    price: '2 124 000  ',
     url: '/images/Хавьер-Мулио-Испания-2273-106х85см-1500x1204.webp',
   },
   {
@@ -253,7 +253,7 @@ const artworks: Artwork[] = [
     title: 'Картина №568',
     author: 'Соледад Фернандез (Испания)',
     size: '122х92см',
-    price: '1 759 000 р.',
+    price: '1 759 000  ',
     url: '/images/568-1500x1144.webp',
   },
   {
@@ -261,31 +261,24 @@ const artworks: Artwork[] = [
     title: 'Картина №2295',
     author: 'Маркос Эстеве (Испания)',
     size: '104х62см',
-    price: '450 000 р.',
+    price: '450 000  ',
     url: '/images/Маркос-Эстеве-Испания-2295-104х62см-1500x893.webp',
   },
+
   {
     id: 31,
-    title: 'Картина №2296',
-    author: 'Маркос Эстеве (Испания)',
-    size: '104х62см',
-    price: '450 000 р.',
-    url: '/images/Маркос-Эстеве-Испания-2295-104х62см-1500x893.webp',
-  },
-  {
-    id: 32,
     title: 'Картина №958',
     author: 'Герман Арасил (Испания)',
     size: '91х68см',
-    price: '250 000 р.',
+    price: '250 000  ',
     url: '/images/Герман-Арасил-Испания-958-91х68см.webp',
   },
   {
-    id: 33,
+    id: 32,
     title: 'Картина №1526',
     author: 'Г.Голиа (Италия)',
     size: '95х75см',
-    price: '264 000 р.',
+    price: '264 000  ',
     url: '/images/Голиа-Италия-1526-95х75см.2745-евро-1500x1179.webp',
   },
 ];
@@ -321,7 +314,7 @@ export default function Gallery() {
               style={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: '400px',
+                maxWidth: '600px',
                 margin: '0 auto',
                 cursor: 'pointer',
                 borderRadius: '8px',
@@ -352,6 +345,9 @@ export default function Gallery() {
               <div
                 style={{ padding: '8px 0', textAlign: 'left', width: '100%' }}
               >
+                <Typography variant="body1" gutterBottom>
+                  <strong> {artwork.title}</strong>
+                </Typography>
                 <Typography variant="body2" color="text.primary">
                   <strong>Автор:</strong> {artwork.author}
                 </Typography>
@@ -406,6 +402,9 @@ export default function Gallery() {
                   style={{ borderRadius: '4px' }}
                 />
               </div>
+              <Typography variant="body1" gutterBottom>
+                {selectedArtwork.title}
+              </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Автор:</strong> {selectedArtwork.author}
               </Typography>
