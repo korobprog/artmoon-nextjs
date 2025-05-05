@@ -62,7 +62,7 @@ export function CallbackForm() {
     }
   };
 
-  const toggleForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleForm = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setIsFormOpen(!isFormOpen);
     setError('');
@@ -94,15 +94,20 @@ export function CallbackForm() {
 
       {/* Модальное окно формы */}
       {isFormOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-40 bg-black bg-opacity-50">
-          <div className="max-w-md w-full mx-4 p-6 bg-white rounded-lg shadow-xl">
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          {/* Размытый фон */}
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={toggleForm}
+          ></div>
+          <div className="max-w-md w-full mx-4 p-6 bg-white rounded-lg shadow-xl relative z-10">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-gray-800">
                 Заказать обратный звонок
               </h2>
               <button
                 onClick={toggleForm}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 hover:cursor-pointer"
                 aria-label="Закрыть форму"
               >
                 <svg
@@ -166,7 +171,7 @@ export function CallbackForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors ${
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors hover:cursor-pointer ${
                   isLoading ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >

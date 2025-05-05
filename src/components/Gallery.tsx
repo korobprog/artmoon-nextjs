@@ -309,7 +309,8 @@ export default function Gallery() {
         }}
       >
         {artworks.map((artwork) => (
-          <Grid item xs={12} sm={6} md={4} key={artwork.id}>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <Grid item xs={12} sm={6} md={4} key={artwork.id} {...({} as any)}>
             <div
               style={{
                 position: 'relative',
@@ -327,11 +328,7 @@ export default function Gallery() {
               }}
               onClick={() => handleClickOpen(artwork)}
             >
-              <div
-                style={{
-                  width: '100%',
-                }}
-              >
+              <div style={{ width: '100%' }}>
                 <Image
                   src={artwork.url}
                   alt={artwork.title}
@@ -346,7 +343,7 @@ export default function Gallery() {
                 style={{ padding: '8px 0', textAlign: 'left', width: '100%' }}
               >
                 <Typography variant="body1" gutterBottom>
-                  <strong> {artwork.title}</strong>
+                  <strong>{artwork.title}</strong>
                 </Typography>
                 <Typography variant="body2" color="text.primary">
                   <strong>Автор:</strong> {artwork.author}
@@ -362,7 +359,6 @@ export default function Gallery() {
           </Grid>
         ))}
       </Grid>
-
       {/* Диалог для увеличенного изображения */}
       <Dialog open={open} onClose={handleClose} maxWidth="md">
         <DialogTitle>
