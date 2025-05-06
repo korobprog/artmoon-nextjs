@@ -9,8 +9,8 @@ import { Menu, X } from 'lucide-react';
 const useWindowSize = () => {
   // Значения по умолчанию для серверного рендеринга
   const [windowSize, setWindowSize] = useState({
-    width: 1200,
-    height: 800,
+    width: 0,
+    height: 0,
     isMobile: false,
     isClient: false,
   });
@@ -69,10 +69,16 @@ const useScrollPosition = () => {
 export default function Navbar() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   // Получаем размеры окна и позицию прокрутки
-  const { isMobile, isClient } = useWindowSize();
+  const { isMobile } = useWindowSize();
   const { isScrolled, scrollY } = useScrollPosition();
+
+  // Устанавливаем флаг mounted после первого рендера
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Закрываем меню при прокрутке
   useEffect(() => {
@@ -125,13 +131,14 @@ export default function Navbar() {
             }}
           >
             <h1 className="text-white text-2xl md:text-3xl font-serif italic tracking-wider">
-              Art Boutique <span className="font-normal">«MOON»</span>
+              Art<span className="font-normal">«MOON»</span>
             </h1>
           </div>
-          {/* Левая группа кнопок - отображаем только на клиенте и не на мобильных */}
-          {isClient && !isMobile ? (
-            <div className="flex space-x-6 mr-auto">
-              {menuItems.slice(0, 2).map((item) => (
+          {/* Левая группа кнопок - отображаем только после монтирования и не на мобильных */}
+          <div className="flex space-x-6 mr-auto">
+            {mounted &&
+              !isMobile &&
+              menuItems.slice(0, 2).map((item) => (
                 <Link
                   href={item.href}
                   key={item.text}
@@ -140,10 +147,7 @@ export default function Navbar() {
                   {item.text}
                 </Link>
               ))}
-            </div>
-          ) : (
-            <div className="mr-auto"></div> // Пустой div для сохранения структуры при серверном рендеринге
-          )}
+          </div>
 
           {/* Логотип по центру - используем абсолютное позиционирование с расчетом положения */}
           <div
@@ -178,10 +182,11 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Правая группа кнопок - отображаем только на клиенте и не на мобильных */}
-          {isClient && !isMobile ? (
-            <div className="flex space-x-6 ml-auto">
-              {menuItems.slice(2).map((item) => (
+          {/* Правая группа кнопок - отображаем только после монтирования и не на мобильных */}
+          <div className="flex space-x-6 ml-auto">
+            {mounted &&
+              !isMobile &&
+              menuItems.slice(2).map((item) => (
                 <Link
                   href={item.href}
                   key={item.text}
@@ -190,13 +195,10 @@ export default function Navbar() {
                   {item.text}
                 </Link>
               ))}
-            </div>
-          ) : (
-            <div className="ml-auto"></div> // Пустой div для сохранения структуры при серверном рендеринге
-          )}
+          </div>
 
-          {/* Кнопка бургера - отображаем только на клиенте и на мобильных */}
-          {isClient && isMobile ? (
+          {/* Кнопка бургера - отображаем только после монтирования и на мобильных */}
+          {mounted && isMobile && (
             <button
               onClick={toggleDrawer}
               aria-label="Toggle menu"
@@ -208,12 +210,12 @@ export default function Navbar() {
                 <Menu className="h-10 w-10" />
               )}
             </button>
-          ) : null}
+          )}
         </div>
       </nav>
 
-      {/* Мобильное меню - отображаем только на клиенте, на мобильных и когда открыто */}
-      {isClient && isMobile && openDrawer ? (
+      {/* Мобильное меню - отображаем только после монтирования, на мобильных и когда открыто */}
+      {mounted && isMobile && openDrawer && (
         <div
           className="fixed inset-0 bg-opacity-10 backdrop-blur-md z-40"
           onClick={() => setOpenDrawer(false)} // Close menu when clicking on the black overlay
@@ -250,7 +252,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
 
       <div
         className={`transition-all duration-500 ease-in-out ${

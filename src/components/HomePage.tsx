@@ -5,13 +5,6 @@ export default function HomePage() {
   return (
     <section className="flex items-center justify-center min-h-screen py-10 bg-[url('/public/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-4xl mx-auto text-center px-6">
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-indigo-600 mb-6 font-playfair">
-            Art Boutique «MOON»
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-8"></div>
-        </div>
-
         <div className="space-y-8">
           <div>
             <p className="text-2xl md:text-3xl font-serif text-gray-900 leading-relaxed">
@@ -22,7 +15,9 @@ export default function HomePage() {
               современных испанских и итальянских художников.
             </p>
           </div>
-
+          <div className="mb-12">
+            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-8"></div>
+          </div>
           <div>
             <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed bg-gradient-to-r from-gray-50 to-amber-50 p-6 rounded-xl shadow-sm">
               Более 20 лет мы сотрудничаем напрямую с европейскими художниками и
