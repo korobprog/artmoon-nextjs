@@ -12,19 +12,21 @@ const useWindowSize = () => {
     width: 0,
     height: 0,
     isMobile: false,
+    isSmallMobile: false,
     isClient: false,
   });
 
   useEffect(() => {
-    // Проверяем, что мы на клиенте
-    if (typeof window === 'undefined') return;
-
     // Этот код выполняется только на клиенте
     const handleResize = () => {
+      const width = window.innerWidth;
+      const newIsSmallMobile = width < 515;
+      console.log('Window resized:', width, 'isSmallMobile:', newIsSmallMobile);
       setWindowSize({
-        width: window.innerWidth,
+        width: width,
         height: window.innerHeight,
-        isMobile: window.innerWidth <= 768,
+        isMobile: width <= 768,
+        isSmallMobile: newIsSmallMobile,
         isClient: true,
       });
     };
@@ -47,9 +49,6 @@ const useScrollPosition = () => {
   });
 
   useEffect(() => {
-    // Проверяем, что мы на клиенте
-    if (typeof window === 'undefined') return;
-
     // Функция для обработки события прокрутки
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -78,7 +77,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   // Получаем размеры окна и позицию прокрутки
-  const { isMobile } = useWindowSize();
+  const { isMobile, width } = useWindowSize();
   const { isScrolled, scrollY } = useScrollPosition();
 
   // Устанавливаем флаг mounted после первого рендера
@@ -88,9 +87,6 @@ export default function Navbar() {
 
   // Закрываем меню при прокрутке
   useEffect(() => {
-    // Проверяем, что мы на клиенте
-    if (typeof window === 'undefined') return;
-
     let lastScrollY = scrollY;
 
     const handleScroll = () => {
@@ -103,7 +99,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [openDrawer, scrollY]);
+  }, [openDrawer]);
 
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
@@ -162,7 +158,7 @@ export default function Navbar() {
           <div
             className="absolute left-0 w-full transition-all duration-500 ease-in-out"
             style={{
-              top: -140,
+              top: width <= 375 ? -120 : -140, // Если ширина <= 375px, то top: -120, иначе -140
               opacity: isScrolled ? 0 : 1,
               transform: isScrolled ? 'translateY(-20px)' : 'translateY(0)',
               pointerEvents: 'none', // Изменено с 'auto' на 'none', чтобы не перехватывать клики
@@ -178,12 +174,23 @@ export default function Navbar() {
                     marginTop: '115px', // Половина высоты nav (230px / 2)
                   }}
                 >
+                  {/* Используем два изображения с CSS-классами для переключения видимости */}
                   <Image
+                    key="desktop-logo"
                     src="/styles/logo.png"
                     alt="Art Moon Logo"
                     width={logoSize.width}
                     height={logoSize.height}
-                    className="object-contain w-auto"
+                    className="object-contain w-auto hidden min-[516px]:block"
+                    priority
+                  />
+                  <Image
+                    key="mobile-logo"
+                    src="/styles/logo-mob.png"
+                    alt="Art Moon Logo Mobile"
+                    width={logoSize.width}
+                    height={logoSize.height}
+                    className="object-contain w-auto block min-[516px]:hidden"
                     priority
                   />
                 </div>
