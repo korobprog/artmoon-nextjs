@@ -156,7 +156,7 @@ export default function Navbar() {
               top: -140,
               opacity: isScrolled ? 0 : 1,
               transform: isScrolled ? 'translateY(-20px)' : 'translateY(0)',
-              pointerEvents: isScrolled ? 'none' : 'auto',
+              pointerEvents: 'none', // Изменено с 'auto' на 'none', чтобы не перехватывать клики
             }}
           >
             <div className="flex justify-center">
