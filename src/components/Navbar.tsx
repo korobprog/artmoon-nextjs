@@ -7,35 +7,84 @@ import { Menu, X } from 'lucide-react';
 
 // Выносим хуки за пределы компонента в соответствии с правилами хуков React
 const useWindowSize = () => {
-  // Значения по умолчанию для серверного рендеринга
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-    isMobile: false,
-    isSmallMobile: false,
-    isClient: false,
-  });
+  // Получаем сохраненные размеры из localStorage, если они есть
+  const getInitialSize = () => {
+    if (typeof window !== 'undefined') {
+      try {
+        const savedSize = localStorage.getItem('windowSize');
+        if (savedSize) {
+          const parsed = JSON.parse(savedSize);
+          return {
+            width: parsed.width || 0,
+            height: parsed.height || 0,
+            isMobile: parsed.width <= 900,
+            isSmallMobile: parsed.width < 515,
+            isClient: true,
+          };
+        }
+      } catch (e) {
+        console.error('Error reading from localStorage:', e);
+      }
+    }
+    return {
+      width: 0,
+      height: 0,
+      isMobile: false,
+      isSmallMobile: false,
+      isClient: false,
+    };
+  };
+
+  // Используем сохраненные значения как начальные
+  const [windowSize, setWindowSize] = useState(getInitialSize);
 
   useEffect(() => {
     // Этот код выполняется только на клиенте
     const handleResize = () => {
       const width = window.innerWidth;
+      const height = window.innerHeight;
       const newIsSmallMobile = width < 515;
-      console.log('Window resized:', width, 'isSmallMobile:', newIsSmallMobile);
-      setWindowSize({
+      const isMobile = width <= 900;
+
+      const newSize = {
         width: width,
-        height: window.innerHeight,
-        isMobile: width <= 768,
+        height: height,
+        isMobile: isMobile,
         isSmallMobile: newIsSmallMobile,
         isClient: true,
-      });
+      };
+
+      console.log(
+        'Window resized:',
+        width,
+        'isSmallMobile:',
+        newIsSmallMobile,
+        'isMobile:',
+        isMobile
+      );
+
+      // Сохраняем размеры в localStorage
+      try {
+        localStorage.setItem('windowSize', JSON.stringify({ width, height }));
+      } catch (e) {
+        console.error('Error saving to localStorage:', e);
+      }
+
+      setWindowSize(newSize);
     };
 
     // Вызываем сразу при монтировании
     handleResize();
+    console.log(
+      'useWindowSize effect executed, initial width:',
+      window.innerWidth
+    );
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      console.log('useWindowSize cleanup, removing resize listener');
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return windowSize;
@@ -77,13 +126,28 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   // Получаем размеры окна и позицию прокрутки
-  const { isMobile, width } = useWindowSize();
+  const { isMobile, width, isClient } = useWindowSize();
   const { isScrolled, scrollY } = useScrollPosition();
 
   // Устанавливаем флаг mounted после первого рендера
   useEffect(() => {
     setMounted(true);
+    console.log(
+      'Navbar mounted, width:',
+      width,
+      'isMobile:',
+      isMobile,
+      'isClient:',
+      isClient
+    );
   }, []);
+
+  // Логируем изменения ширины экрана
+  useEffect(() => {
+    if (mounted) {
+      console.log('Width changed:', width, 'isMobile:', isMobile);
+    }
+  }, [width, isMobile, mounted]);
 
   // Закрываем меню при прокрутке
   useEffect(() => {
@@ -125,108 +189,134 @@ export default function Navbar() {
           isScrolled ? 'h-[80px]' : 'h-[230px]'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center relative">
-          {/* Текст, который появляется при прокрутке */}
-          <div
-            className="absolute left-0 w-full flex justify-center items-center transition-all duration-500 ease-in-out"
-            style={{
-              opacity: isScrolled ? 1 : 0,
-              transform: isScrolled ? 'translateY(0)' : 'translateY(20px)',
-              pointerEvents: isScrolled ? 'auto' : 'none',
-            }}
-          >
-            <h1 className="text-white text-2xl md:text-3xl font-serif italic tracking-wider">
-              Art<span className="font-normal">«MOON»</span>
-            </h1>
-          </div>
-          {/* Левая группа кнопок - отображаем только после монтирования и не на мобильных */}
-          <div className="flex space-x-6 mr-auto">
-            {mounted &&
-              !isMobile &&
-              menuItems.slice(0, 2).map((item) => (
-                <Link
-                  href={item.href}
-                  key={item.text}
-                  className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-lg font-medium"
-                >
-                  {item.text}
+        {/* Основной контейнер с flex-структурой */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col relative">
+          {/* Верхняя часть с логотипом и меню */}
+          <div className="flex flex-col h-full">
+            {/* Логотип - виден только когда не прокручено */}
+            <div
+              className="flex-grow flex relative transition-all duration-500 ease-in-out"
+              style={{
+                opacity: isScrolled ? 0 : 1,
+                maxHeight: isScrolled ? '0' : '230px',
+                overflow: 'hidden',
+              }}
+            >
+              {mounted && width > 0 && (
+                <Link href="/" className="block">
+                  <div
+                    className="flex justify-center absolute w-full"
+                    style={{
+                      bottom: '1px',
+                      transform:
+                        width <= 516 ? 'translateY(-10px)' : 'translateY(10px)', // Поднимаем логотип для мобильного вида
+                    }}
+                    ref={(el) => {
+                      if (el && mounted) {
+                        console.log(
+                          'Logo container (flex): width:',
+                          width,
+                          'isMobile:',
+                          width <= 516
+                        );
+                      }
+                    }}
+                  >
+                    <Image
+                      key={width <= 516 ? 'mobile-logo' : 'desktop-logo'}
+                      src={
+                        width <= 516
+                          ? '/styles/logo-mob.png'
+                          : '/styles/logo.png'
+                      }
+                      alt="Art Moon Logo"
+                      width={logoSize.width}
+                      height={logoSize.height}
+                      className="object-contain will-change-contents"
+                      style={{
+                        maxWidth: width <= 516 ? '430px' : '450px',
+                      }}
+                      priority
+                      onLoad={() => {
+                        console.log(
+                          'Logo image loaded (flex):',
+                          'type:',
+                          width <= 516 ? 'mobile' : 'desktop',
+                          'maxWidth:',
+                          width <= 516 ? '380px' : '400px'
+                        );
+                      }}
+                    />
+                  </div>
                 </Link>
-              ))}
-          </div>
+              )}
+            </div>
 
-          {/* Логотип по центру - используем абсолютное позиционирование с расчетом положения */}
-          <div
-            className="absolute left-0 w-full transition-all duration-500 ease-in-out"
-            style={{
-              top: width <= 375 ? -120 : -140, // Если ширина <= 375px, то top: -120, иначе -140
-              opacity: isScrolled ? 0 : 1,
-              transform: isScrolled ? 'translateY(-20px)' : 'translateY(0)',
-              pointerEvents: 'none', // Изменено с 'auto' на 'none', чтобы не перехватывать клики
-            }}
-          >
-            <div className="flex justify-center">
-              <Link href="/">
-                <div
-                  className="relative"
-                  style={{
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    marginTop: '115px', // Половина высоты nav (230px / 2)
-                  }}
+            {/* Текст, который появляется при прокрутке */}
+            <div
+              className="absolute left-0 w-full flex justify-center items-center transition-all duration-500 ease-in-out"
+              style={{
+                opacity: isScrolled ? 1 : 0,
+                transform: isScrolled ? 'translateY(-50%)' : 'translateY(20px)',
+                pointerEvents: isScrolled ? 'auto' : 'none',
+                zIndex: 5,
+                top: '50%',
+              }}
+            >
+              <h1 className="text-white text-2xl md:text-3xl font-serif italic tracking-wider">
+                Art<span className="font-normal">«MOON»</span>
+              </h1>
+            </div>
+
+            {/* Меню на одном уровне с полосой меню - с улучшенной видимостью */}
+            <div className="flex justify-between items-center w-full h-full z-10 absolute bottom-0 left-0 px-4">
+              {/* Левая группа кнопок */}
+              <div className="flex space-x-8">
+                {(!isMobile || width === 0) &&
+                  menuItems.slice(0, 2).map((item) => (
+                    <Link
+                      href={item.href}
+                      key={item.text}
+                      className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-xl font-bold py-2"
+                    >
+                      {item.text}
+                    </Link>
+                  ))}
+              </div>
+
+              {/* Пустой центральный элемент для сохранения структуры flex */}
+              <div className="flex-grow"></div>
+
+              {/* Правая группа кнопок */}
+              <div className="flex space-x-8">
+                {(!isMobile || width === 0) &&
+                  menuItems.slice(2).map((item) => (
+                    <Link
+                      href={item.href}
+                      key={item.text}
+                      className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-xl font-bold py-2"
+                    >
+                      {item.text}
+                    </Link>
+                  ))}
+              </div>
+
+              {/* Кнопка бургера - отображаем только после монтирования и на мобильных */}
+              {mounted && isMobile && (
+                <button
+                  onClick={toggleDrawer}
+                  aria-label="Toggle menu"
+                  className="text-white hover:text-purple-300 focus:outline-none ml-4"
                 >
-                  {/* Используем два изображения с CSS-классами для переключения видимости */}
-                  <Image
-                    key="desktop-logo"
-                    src="/styles/logo.png"
-                    alt="Art Moon Logo"
-                    width={logoSize.width}
-                    height={logoSize.height}
-                    className="object-contain w-auto hidden min-[516px]:block"
-                    priority
-                  />
-                  <Image
-                    key="mobile-logo"
-                    src="/styles/logo-mob.png"
-                    alt="Art Moon Logo Mobile"
-                    width={logoSize.width}
-                    height={logoSize.height}
-                    className="object-contain w-auto block min-[516px]:hidden"
-                    priority
-                  />
-                </div>
-              </Link>
+                  {openDrawer ? (
+                    <X className="h-10 w-10" />
+                  ) : (
+                    <Menu className="h-10 w-10" />
+                  )}
+                </button>
+              )}
             </div>
           </div>
-
-          {/* Правая группа кнопок - отображаем только после монтирования и не на мобильных */}
-          <div className="flex space-x-6 ml-auto">
-            {mounted &&
-              !isMobile &&
-              menuItems.slice(2).map((item) => (
-                <Link
-                  href={item.href}
-                  key={item.text}
-                  className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-lg font-medium"
-                >
-                  {item.text}
-                </Link>
-              ))}
-          </div>
-
-          {/* Кнопка бургера - отображаем только после монтирования и на мобильных */}
-          {mounted && isMobile && (
-            <button
-              onClick={toggleDrawer}
-              aria-label="Toggle menu"
-              className="ml-auto mr-4 text-white hover:text-purple-300 focus:outline-none z-60"
-            >
-              {openDrawer ? (
-                <X className="h-10 w-10" />
-              ) : (
-                <Menu className="h-10 w-10" />
-              )}
-            </button>
-          )}
         </div>
       </nav>
 
@@ -241,6 +331,10 @@ export default function Navbar() {
             className={`fixed right-0 w-full z-50 transition-all duration-500 ease-in-out ${
               isScrolled ? 'top-[80px]' : 'top-[230px]'
             }`}
+            style={{
+              // Добавляем логирование позиции мобильного меню
+              top: isScrolled ? '80px' : '230px',
+            }}
           >
             <div className="flex justify-end pr-4">
               <div

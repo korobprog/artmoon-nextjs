@@ -1,16 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-
-// Данные о художниках
-const artists = [
-  { name: 'Ройо (Royo)', image: '/user/royo.jpg' },
-  { name: 'Соледад Фернандес', image: '/user/artist-image-2.jpg' },
-  { name: 'Хавьер Мулио', image: '/user/javier.jpg' },
-  { name: 'Наварро Монтллор', image: '/user/navarro1.jpg' },
-  { name: 'Голиа (G. Golia)', image: '/user/artist-image-2.jpg' },
-];
 
 export default function FooterPage() {
   return (
