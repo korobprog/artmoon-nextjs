@@ -1,6 +1,16 @@
 // components/Home.tsx
 'use client';
 
+import Image from 'next/image';
+
+const artists = [
+  { name: 'Ройо (Royo)', image: '/user/royo.jpg' },
+  { name: 'Хавьер Мулио', image: '/user/javier.jpg' },
+  { name: 'Соледад Фернандес', image: '/user/artist-image-2.jpg' },
+  { name: 'Элиос Хисберт', image: '/user/elios.jpg' },
+  { name: 'Наварро Монтллор', image: '/user/navarro1.jpg' },
+];
+
 export default function HomePage() {
   return (
     <section className="flex items-center justify-center min-h-screen py-10 bg-[url('/public/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
@@ -31,21 +41,27 @@ export default function HomePage() {
               именем:
             </p>
             <div className="flex flex-wrap justify-center gap-3 mt-4">
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 rounded-full font-medium">
-                Ройо (Royo)
-              </span>
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 rounded-full font-medium">
-                Соледад Фернандес
-              </span>
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 rounded-full font-medium">
-                Хавьер Мулио
-              </span>
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 rounded-full font-medium">
-                Наварро Монтллор
-              </span>
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 rounded-full font-medium">
-                Голиа (G. Golia)
-              </span>
+              {/* Секция художников */}
+              <div className="mb-8 pb-6 border-b border-gray-700">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 justify-items-center">
+                  {artists.map((artist, index) => (
+                    <div key={index} className="flex flex-col items-center">
+                      <div className="relative w-20 h-20 mb-2 overflow-hidden rounded-full border-2 border-yellow-400 shadow-lg">
+                        <Image
+                          src={artist.image}
+                          alt={artist.name}
+                          width={80}
+                          height={80}
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="text-center text-sm font-geist-sans text-black">
+                        {artist.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -54,11 +70,56 @@ export default function HomePage() {
               &quot;Наши выставки проходили в Московской Городской Думе, Мэрии
               Москвы, Крокус-Экспо и других престижных площадках.&quot;
             </p>
+
+            {/* Галерея изображений с выставок */}
+            <div className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  {
+                    id: 1,
+                    url: '/imagesduma/01.jpg',
+                    title: 'Выставка в Московской Городской Думе',
+                  },
+                  {
+                    id: 2,
+                    url: '/imagesduma/Untitled-1.jpg',
+                    title: 'Выставка в Мэрии Москвы',
+                  },
+                ].map((image) => (
+                  <div
+                    key={image.id}
+                    className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                    style={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e0e0e0',
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                    }}
+                  >
+                    <div className="relative h-64 w-full">
+                      <Image
+                        src={image.url}
+                        alt={image.title}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="rounded-t-lg"
+                      />
+                    </div>
+                    <div className="p-3 bg-gradient-to-r from-amber-50 to-amber-100">
+                      <p className="text-center text-gray-800 font-medium">
+                        {image.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              Каждая картина имеет:
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-black">
+              <span className="text-xl font-bold text-amber-700 bg-gradient-to-r from-amber-50 to-amber-100 px-4 py-2 rounded-lg shadow-sm">
+                Каждая картина имеет
+              </span>
               <div className="flex items-center">
                 <svg
                   className="w-8 h-8 text-amber-600 mr-2"

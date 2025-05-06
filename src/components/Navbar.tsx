@@ -16,6 +16,9 @@ const useWindowSize = () => {
   });
 
   useEffect(() => {
+    // Проверяем, что мы на клиенте
+    if (typeof window === 'undefined') return;
+
     // Этот код выполняется только на клиенте
     const handleResize = () => {
       setWindowSize({
@@ -44,6 +47,9 @@ const useScrollPosition = () => {
   });
 
   useEffect(() => {
+    // Проверяем, что мы на клиенте
+    if (typeof window === 'undefined') return;
+
     // Функция для обработки события прокрутки
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -82,6 +88,9 @@ export default function Navbar() {
 
   // Закрываем меню при прокрутке
   useEffect(() => {
+    // Проверяем, что мы на клиенте
+    if (typeof window === 'undefined') return;
+
     let lastScrollY = scrollY;
 
     const handleScroll = () => {
@@ -94,7 +103,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [openDrawer]);
+  }, [openDrawer, scrollY]);
 
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);

@@ -1,18 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import {
-  Grid,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Button,
-  Typography,
-} from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import { Grid, Typography } from '@mui/material';
 
 interface Artwork {
   id: number;
@@ -286,16 +276,58 @@ const artworks: Artwork[] = [
 export default function Gallery() {
   const [open, setOpen] = useState(false);
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickOpen = (artwork: Artwork) => {
     setSelectedArtwork(artwork);
     setOpen(true);
+    // Блокируем прокрутку страницы при открытии модального окна
+    document.body.style.overflow = 'hidden';
   };
 
   const handleClose = () => {
     setOpen(false);
     setSelectedArtwork(null);
+    // Возвращаем прокрутку страницы при закрытии модального окна
+    document.body.style.overflow = 'auto';
   };
+
+  // Закрытие модального окна при клике вне его содержимого
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        handleClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
+
+  // Закрытие модального окна при нажатии клавиши Escape
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [open]);
 
   return (
     <div style={{ overflowX: 'hidden' }}>
@@ -340,85 +372,158 @@ export default function Gallery() {
                 />
               </div>
               <div
-                style={{ padding: '8px 0', textAlign: 'left', width: '100%' }}
+                className="p-4 mt-2 rounded-md bg-white"
+                style={{
+                  width: '100%',
+                  border: '1px solid #e0e0e0',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+                }}
               >
-                <Typography variant="body1" gutterBottom>
-                  <strong>{artwork.title}</strong>
+                <Typography variant="body1" className="mb-3 text-center">
+                  <strong className="text-purple-800">{artwork.title}</strong>
                 </Typography>
-                <Typography variant="body2" color="text.primary">
-                  <strong>Автор:</strong> {artwork.author}
-                </Typography>
-                <Typography variant="body2" color="text.primary">
-                  <strong>Размер:</strong> {artwork.size}
-                </Typography>
-                <Typography variant="body2" color="text.primary">
-                  <strong>Цена:</strong> {artwork.price} ₽
-                </Typography>
+                <div className="mt-2">
+                  <div className="mb-1">
+                    <strong className="text-purple-800">Автор:</strong>{' '}
+                    <span className="text-purple-900">{artwork.author}</span>
+                  </div>
+                  <div className="mb-1">
+                    <strong className="text-purple-800">Размер:</strong>{' '}
+                    <span className="text-purple-900">{artwork.size}</span>
+                  </div>
+                  <div className="mb-1">
+                    <strong className="text-purple-800">Цена:</strong>{' '}
+                    <span className="text-purple-900 font-bold">
+                      {artwork.price} ₽
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </Grid>
         ))}
       </Grid>
-      {/* Диалог для увеличенного изображения */}
-      <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
+      {/* Модальное окно для увеличенного изображения с использованием Tailwind */}
+      {open && selectedArtwork && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center "
+          style={{
+            backdropFilter: 'blur(8px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            backgroundImage: 'url(/styles/pattern.png)',
+            backgroundBlendMode: 'overlay',
+          }}
+        >
+          <div
+            ref={modalRef}
+            className="relative bg-white rounded-lg max-w-4xl w-full mx-4 my-6 max-h-[90vh] flex flex-col"
+            style={{
+              border: '8px solid #e0e0e0',
+              boxShadow: '0 0 15px rgba(0, 0, 0, 0.2)',
+              backgroundImage: 'url(/styles/pattern.png)',
+              backgroundBlendMode: 'overlay',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent sx={{ overflowX: 'hidden' }}>
-          {selectedArtwork && (
-            <>
-              <div
+            {/* Заголовок и кнопка закрытия */}
+            <div className="flex justify-between items-center p-4 border-b border-purple-300">
+              <h3 className="text-xl font-bold text-purple-800">
+                {selectedArtwork.title}
+              </h3>
+              <button
+                onClick={handleClose}
+                className="w-8 h-8 rounded-full bg-purple-700 flex items-center justify-center hover:bg-purple-800 focus:outline-none transition-colors duration-200 cursor-pointer"
+                aria-label="close"
                 style={{
-                  position: 'relative',
-                  width: '100%',
-                  maxWidth: '600px',
-                  margin: '0 auto',
+                  boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                 }}
               >
-                <Image
-                  src={selectedArtwork.url}
-                  alt={selectedArtwork.title}
-                  layout="responsive"
-                  width={1000}
-                  height={1000}
-                  objectFit="contain"
-                  style={{ borderRadius: '4px' }}
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Содержимое модального окна */}
+            <div className="p-6 overflow-y-auto flex-grow">
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Изображение */}
+                <div className="md:w-2/3 relative">
+                  <div
+                    className="relative w-full h-[400px] md:h-[500px]"
+                    style={{
+                      backgroundColor: 'transparent',
+                    }}
+                  >
+                    <Image
+                      src={selectedArtwork.url}
+                      alt={selectedArtwork.title}
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      className="rounded-md"
+                    />
+                  </div>
+                </div>
+
+                {/* Информация о картине */}
+                <div
+                  className="md:w-1/3 p-4 rounded-md"
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid #e0e0e0',
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                  }}
+                >
+                  <Typography variant="body1" className="mb-4">
+                    <strong className="text-purple-800">Автор:</strong>{' '}
+                    <span className="text-purple-900 font-medium">
+                      {selectedArtwork.author}
+                    </span>
+                  </Typography>
+                  <Typography variant="body1" className="mb-4">
+                    <strong className="text-purple-800">Размер:</strong>{' '}
+                    <span className="text-purple-900 font-medium">
+                      {selectedArtwork.size}
+                    </span>
+                  </Typography>
+                  <Typography variant="body1" className="mb-4">
+                    <strong className="text-purple-800">Цена:</strong>{' '}
+                    <span className="text-purple-900 font-medium">
+                      {selectedArtwork.price} ₽
+                    </span>
+                  </Typography>
+                </div>
               </div>
-              <Typography variant="body1" gutterBottom>
-                {selectedArtwork.title}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                <strong>Автор:</strong> {selectedArtwork.author}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                <strong>Размер:</strong> {selectedArtwork.size}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                <strong>Цена:</strong> {selectedArtwork.price} ₽
-              </Typography>
-            </>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Закрыть
-          </Button>
-        </DialogActions>
-      </Dialog>
+            </div>
+
+            {/* Футер модального окна */}
+            <div className="border-t border-purple-300 p-4 flex justify-end">
+              <button
+                onClick={handleClose}
+                className="px-6 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 focus:outline-none transition-colors duration-200 cursor-pointer"
+                style={{
+                  border: '1px solid #e0e0e0',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                Закрыть
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
