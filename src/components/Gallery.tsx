@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Grid, Typography } from '@mui/material';
+import GalleryItem from './GalleryItem';
 
 interface Artwork {
   id: number;
@@ -343,63 +344,7 @@ export default function Gallery() {
         {artworks.map((artwork) => (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           <Grid item xs={12} sm={6} md={4} key={artwork.id} {...({} as any)}>
-            <div
-              style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '600px',
-                margin: '0 auto',
-                cursor: 'pointer',
-                borderRadius: '8px',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                backgroundColor: '#fff',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '16px',
-              }}
-              onClick={() => handleClickOpen(artwork)}
-            >
-              <div style={{ width: '100%' }}>
-                <Image
-                  src={artwork.url}
-                  alt={artwork.title}
-                  layout="responsive"
-                  width={500}
-                  height={500}
-                  objectFit="cover"
-                  style={{ borderRadius: '4px' }}
-                />
-              </div>
-              <div
-                className="p-4 mt-2 rounded-md bg-white"
-                style={{
-                  width: '100%',
-                  border: '1px solid #e0e0e0',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-                }}
-              >
-                <Typography variant="body1" className="mb-3 text-center">
-                  <strong className="text-purple-800">{artwork.title}</strong>
-                </Typography>
-                <div className="mt-2">
-                  <div className="mb-1">
-                    <strong className="text-purple-800">Автор:</strong>{' '}
-                    <span className="text-purple-900">{artwork.author}</span>
-                  </div>
-                  <div className="mb-1">
-                    <strong className="text-purple-800">Размер:</strong>{' '}
-                    <span className="text-purple-900">{artwork.size}</span>
-                  </div>
-                  <div className="mb-1">
-                    <strong className="text-purple-800">Цена:</strong>{' '}
-                    <span className="text-purple-900 font-bold">
-                      {artwork.price} ₽
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <GalleryItem artwork={artwork} onClick={handleClickOpen} />
           </Grid>
         ))}
       </Grid>
@@ -479,28 +424,31 @@ export default function Gallery() {
 
                 {/* Информация о картине */}
                 <div
-                  className="md:w-1/3 p-4 rounded-md"
+                  className="md:w-1/3 p-6"
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    border: '1px solid #e0e0e0',
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    backgroundImage:
+                      'url(/imagefon/background-of-the-picture-description.png)',
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    color: 'white',
                   }}
                 >
                   <Typography variant="body1" className="mb-4">
-                    <strong className="text-purple-800">Автор:</strong>{' '}
-                    <span className="text-purple-900 font-medium">
+                    <strong className="text-white">Автор:</strong>{' '}
+                    <span className="text-white font-medium">
                       {selectedArtwork.author}
                     </span>
                   </Typography>
                   <Typography variant="body1" className="mb-4">
-                    <strong className="text-purple-800">Размер:</strong>{' '}
-                    <span className="text-purple-900 font-medium">
+                    <strong className="text-white">Размер:</strong>{' '}
+                    <span className="text-white font-medium">
                       {selectedArtwork.size}
                     </span>
                   </Typography>
                   <Typography variant="body1" className="mb-4">
-                    <strong className="text-purple-800">Цена:</strong>{' '}
-                    <span className="text-purple-900 font-medium">
+                    <strong className="text-white">Цена:</strong>{' '}
+                    <span className="text-white font-medium">
                       {selectedArtwork.price} ₽
                     </span>
                   </Typography>
