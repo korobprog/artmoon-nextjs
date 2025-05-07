@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/ui/provider';
-import Curtains from '@/components/Curtains';
+import CurtainsContent from '@/components/CurtainsContent';
+import ClientNavbar from '@/components/ClientNavbar';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,7 +32,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[url('/styles/pattern.png')] bg-cover bg-center min-h-screen`}
       >
         <Providers>
-          <Curtains>{children}</Curtains>
+          <ClientNavbar />
+          <CurtainsContent>{children}</CurtainsContent>
         </Providers>
       </body>
     </html>

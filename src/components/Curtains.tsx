@@ -94,7 +94,7 @@ export default function Curtains({ children }: CurtainsProps) {
     <div className="relative min-h-screen overflow-x-hidden">
       {/* Верхние ажурные элементы */}
       <div
-        className={`fixed top-0 left-0 w-full z-10 pointer-events-none transition-opacity duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[11] pointer-events-none transition-opacity duration-300 ${
           showTopCurtains ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -133,7 +133,7 @@ export default function Curtains({ children }: CurtainsProps) {
       </div>
 
       {/* Левая занавеска */}
-      <div className="fixed top-0 left-0 h-full z-8 pointer-events-none">
+      <div className="fixed top-0 left-0 h-full z-[10] pointer-events-none">
         <div className="relative h-full">
           {/* Левая занавеска */}
           <div className="absolute top-0 left-0">
@@ -156,7 +156,7 @@ export default function Curtains({ children }: CurtainsProps) {
       </div>
 
       {/* Правая занавеска */}
-      <div className="fixed top-0 right-0 h-full z-8 pointer-events-none">
+      <div className="fixed top-0 right-0 h-full z-[10] pointer-events-none">
         <div className="relative h-full">
           {/* Правая занавеска */}
           <div className="absolute top-0 right-0">
@@ -179,7 +179,7 @@ export default function Curtains({ children }: CurtainsProps) {
       </div>
 
       {/* Основное содержимое */}
-      <div className="relative z-10 mx-auto px-[10vw]">{children}</div>
+      <div className="relative z-[5] mx-auto px-[10vw]">{children}</div>
     </div>
   );
 }

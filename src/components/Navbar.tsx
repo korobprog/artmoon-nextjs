@@ -171,7 +171,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center shadow-lg z-50 transition-all duration-500 ease-in-out ${
+        className={`fixed left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center shadow-lg z-[100] transition-all duration-500 ease-in-out ${
           isScrolled ? 'h-[80px]' : 'h-[230px]'
         }`}
         style={{
@@ -294,12 +294,12 @@ export default function Navbar() {
       {/* Мобильное меню - отображаем только после монтирования, на мобильных и когда открыто */}
       {mounted && isMobile && openDrawer && (
         <div
-          className="fixed inset-0 bg-opacity-10 backdrop-blur-md z-40"
+          className="fixed inset-0 bg-opacity-10 backdrop-blur-md z-[90]"
           onClick={() => setOpenDrawer(false)} // Close menu when clicking on the black overlay
         >
           <div
             ref={drawerRef}
-            className={`fixed right-0 w-full z-50 transition-all duration-500 ease-in-out ${
+            className={`fixed right-0 w-full z-[95] transition-all duration-500 ease-in-out ${
               isScrolled ? 'top-[80px]' : 'top-[230px]'
             }`}
             style={{
