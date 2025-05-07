@@ -1,9 +1,14 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { Grid, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Grid } from '@mui/material';
 import GalleryItem from './GalleryItem';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import artworksData from '../data/artworks.json';
 
 interface Artwork {
   id: number;
@@ -14,321 +19,70 @@ interface Artwork {
   url: string;
 }
 
-const artworks: Artwork[] = [
-  {
-    id: 1,
-    title: 'Картина №2275',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2275-95х75см_-1500x1189.webp',
-  },
-  {
-    id: 2,
-    title: 'Картина №2276',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2276-95х75см-1500x1194.webp',
-  },
-  {
-    id: 3,
-    title: 'Картина №2277',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2277-95х75см-1500x1192.webp',
-  },
-  {
-    id: 4,
-    title: 'Картина №2279',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2279-95х75см_-1500x1181.webp',
-  },
-  {
-    id: 5,
-    title: 'Картина №2280',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2280-95х75см-1500x1180.webp',
-  },
-  {
-    id: 6,
-    title: 'Картина №2281',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2281-95х75см-1500x1190.webp',
-  },
-  {
-    id: 7,
-    title: 'Картина №2262',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2262-95х75см-1-1500x1186.webp',
-  },
-  {
-    id: 8,
-    title: 'Картина №2263',
-    author: 'Армандо Романо (Италия)',
-    size: '95х75см',
-    price: '252 000  ',
-    url: '/images/Армандо-Романо-Италия-2263-95х75см-1500x1184.webp',
-  },
-  {
-    id: 9,
-    title: 'Картина №2265',
-    author: 'Армандо Романо (Италия)',
-    size: '115х85см',
-    price: '357 000  ',
-    url: '/images/Армандо-Романо-Италия-2265-115х85см-1500x1112.webp',
-  },
-  {
-    id: 10,
-    title: 'Картина №2266',
-    author: 'Армандо Романо (Италия)',
-    size: '145х85см',
-    price: '470 000  ',
-    url: '/images/Армандо-Романо-Италия-2266-145х85см-1500x883.webp',
-  },
-  {
-    id: 11,
-    title: 'Картина №2282',
-    author: 'Наварро Монтллор (Испания)',
-    size: '145х115см',
-    price: '2 190 000  ',
-    url: '/images/Наварро-Монтллор-Испания-2282-145х115см.webp',
-  },
-  {
-    id: 12,
-    title: 'Картина №2305',
-    author: 'Мартина Йона (Испания)',
-    size: '86х75см',
-    price: '270 000  ',
-    url: '/images/Мартина-Йона-Испания-2305-86х75см-1500x1315.webp',
-  },
-  {
-    id: 13,
-    title: 'Картина №2304',
-    author: 'Мартина Йона (Испания)',
-    size: '98х84см',
-    price: '380 000  ',
-    url: '/images/Мартина-Йона-Испания-2304-98х84см-1500x1294.webp',
-  },
-  {
-    id: 14,
-    title: 'Картина №2302',
-    author: 'Мартина Йона (Испания)',
-    size: '80х70см',
-    price: '270 000  ',
-    url: '/images/Мартина-Йона-Испания-2302-80х70см-1500x1330.webp',
-  },
-  {
-    id: 15,
-    title: 'Картина №2300',
-    author: 'Мартина Йона (Испания)',
-    size: '71х80см',
-    price: '270 000  ',
-    url: '/images/Мартина-Йона-Испания-2300-71х80см-1323x1500.webp',
-  },
-  {
-    id: 16,
-    title: 'Картина №2259',
-    author: 'Мартина Йона (Испания)',
-    size: '98х85см',
-    price: '390 000  ',
-    url: '/images/Мартина-Йона-Испания-2259-98х85см-1500x1301.webp',
-  },
-  {
-    id: 17,
-    title: 'Картина №2260',
-    author: 'Мартина Йона (Испания)',
-    size: '98х85см',
-    price: '390 000  ',
-    url: '/images/Мартина-Йона-Испания-2260-98х85см-1500x1299.webp',
-  },
-  {
-    id: 18,
-    title: 'Картина №2309',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '584 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2309-45х55см.webp',
-  },
-  {
-    id: 19,
-    title: 'Картина №2307',
-    author: 'Хавьер Мулио (Испания)',
-    size: '106х85см',
-    price: '2 124 000  ',
-    url: '/images/Хавьер-Мулио-Испания-____-106х85см.webp',
-  },
-  {
-    id: 20,
-    title: 'Картина №2288',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '567 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2288-45х55см.webp',
-  },
-  {
-    id: 21,
-    title: 'Картина №2285',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '584 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2285-45х55см.webp',
-  },
-  {
-    id: 22,
-    title: 'Картина №2286',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '567 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2286-45х55см.webp',
-  },
-  {
-    id: 23,
-    title: 'Картина №2287',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '584 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2287-45х55см.webp',
-  },
-  {
-    id: 24,
-    title: 'Картина №2289',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '584 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2289-45х55см.webp',
-  },
-  {
-    id: 25,
-    title: 'Картина №2290',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '584 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2290-45х55см.webp',
-  },
-  {
-    id: 26,
-    title: 'Картина №2291',
-    author: 'Хавьер Мулио (Испания)',
-    size: '45х55см',
-    price: '567 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2291-45х55см.webp',
-  },
-  {
-    id: 27,
-    title: 'Картина №2271',
-    author: 'Хавьер Мулио (Испания)',
-    size: '63х75см',
-    price: '1 656 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2271-63х75см-1268x1500.webp',
-  },
-  {
-    id: 28,
-    title: 'Картина №2273',
-    author: 'Хавьер Мулио (Испания)',
-    size: '106х85см',
-    price: '2 124 000  ',
-    url: '/images/Хавьер-Мулио-Испания-2273-106х85см-1500x1204.webp',
-  },
-  {
-    id: 29,
-    title: 'Картина №568',
-    author: 'Соледад Фернандез (Испания)',
-    size: '122х92см',
-    price: '1 759 000  ',
-    url: '/images/568-1500x1144.webp',
-  },
-  {
-    id: 30,
-    title: 'Картина №2295',
-    author: 'Маркос Эстеве (Испания)',
-    size: '104х62см',
-    price: '450 000  ',
-    url: '/images/Маркос-Эстеве-Испания-2295-104х62см-1500x893.webp',
-  },
+// Интерфейс для слайдов лайтбокса
+interface LightboxSlide {
+  src: string;
+  alt: string;
+  title?: string;
+  description?: string;
+}
 
-  {
-    id: 31,
-    title: 'Картина №958',
-    author: 'Герман Арасил (Испания)',
-    size: '91х68см',
-    price: '250 000  ',
-    url: '/images/Герман-Арасил-Испания-958-91х68см.webp',
-  },
-  {
-    id: 32,
-    title: 'Картина №1526',
-    author: 'Г.Голиа (Италия)',
-    size: '95х75см',
-    price: '264 000  ',
-    url: '/images/Голиа-Италия-1526-95х75см.2745-евро-1500x1179.webp',
-  },
-];
+// Используем импортированные данные из JSON-файла с правильной типизацией
+const artworks: Artwork[] = artworksData as Artwork[];
 
 export default function Gallery() {
-  const [open, setOpen] = useState(false);
-  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(-1);
+
+  // Добавляем CSS для вертикального отображения информации о картине
+  useEffect(() => {
+    // Добавляем стили только когда лайтбокс открыт
+    if (index >= 0) {
+      // Создаем элемент стиля
+      const style = document.createElement('style');
+      style.id = 'lightbox-custom-styles';
+      style.innerHTML = `
+        .yarl__slide {
+          flex-direction: column !important;
+        }
+        .yarl__slide_captions {
+          position: relative !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          padding: 15px 0 !important;
+          background-color: rgba(0, 0, 0, 0.5) !important;
+          color: white !important;
+          text-align: center !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Удаляем стили при закрытии лайтбокса
+    return () => {
+      const existingStyle = document.getElementById('lightbox-custom-styles');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+    };
+  }, [index]);
+
+  // Подготовка слайдов для лайтбокса
+  const slides: LightboxSlide[] = artworks.map((artwork) => ({
+    src: artwork.url,
+    alt: artwork.title,
+    title: artwork.title,
+    description: `${artwork.author}, ${artwork.size}, ${artwork.price} ₽`,
+  }));
 
   const handleClickOpen = (artwork: Artwork) => {
-    setSelectedArtwork(artwork);
-    setOpen(true);
-    // Блокируем прокрутку страницы при открытии модального окна
-    document.body.style.overflow = 'hidden';
+    // Находим индекс выбранного изображения в массиве
+    const artworkIndex = artworks.findIndex((item) => item.id === artwork.id);
+    setIndex(artworkIndex);
   };
 
   const handleClose = () => {
-    setOpen(false);
-    setSelectedArtwork(null);
-    // Возвращаем прокрутку страницы при закрытии модального окна
-    document.body.style.overflow = 'auto';
+    setIndex(-1);
   };
-
-  // Закрытие модального окна при клике вне его содержимого
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
-        handleClose();
-      }
-    };
-
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [open]);
-
-  // Закрытие модального окна при нажатии клавиши Escape
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    if (open) {
-      document.addEventListener('keydown', handleEscapeKey);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, [open]);
 
   return (
     <div style={{ overflowX: 'hidden' }}>
@@ -348,130 +102,72 @@ export default function Gallery() {
           </Grid>
         ))}
       </Grid>
-      {/* Модальное окно для увеличенного изображения с использованием Tailwind */}
-      {open && selectedArtwork && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center "
-          style={{
-            backdropFilter: 'blur(8px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.4)',
-            backgroundImage: 'url(/styles/pattern.png)',
-            backgroundBlendMode: 'overlay',
-          }}
-        >
-          <div
-            ref={modalRef}
-            className="relative bg-white rounded-lg max-w-4xl w-full mx-4 my-6 max-h-[90vh] flex flex-col"
-            style={{
-              border: '8px solid #e0e0e0',
-              boxShadow: '0 0 15px rgba(0, 0, 0, 0.2)',
-              backgroundImage: 'url(/styles/pattern.png)',
-              backgroundBlendMode: 'overlay',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            {/* Заголовок и кнопка закрытия */}
-            <div className="flex justify-between items-center p-4 border-b border-purple-300">
-              <h3 className="text-xl font-bold text-purple-800">
-                {selectedArtwork.title}
-              </h3>
-              <button
-                onClick={handleClose}
-                className="w-8 h-8 rounded-full bg-purple-700 flex items-center justify-center hover:bg-purple-800 focus:outline-none transition-colors duration-200 cursor-pointer"
-                aria-label="close"
+
+      {/* Лайтбокс для просмотра изображений */}
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={handleClose}
+        slides={slides}
+        plugins={[Zoom, Thumbnails]}
+        carousel={{
+          padding: '0px',
+          spacing: '30px',
+          imageFit: 'contain',
+        }}
+        styles={{
+          container: { backgroundColor: 'rgba(0, 0, 0, 0.9)' },
+          // Удаляем свойство slideContainer, так как оно не существует в типе SlotStyles
+          slide: { justifyContent: 'center', alignItems: 'center' },
+        }}
+        zoom={{
+          maxZoomPixelRatio: 3,
+          zoomInMultiplier: 2,
+          doubleTapDelay: 300,
+          doubleClickDelay: 300,
+          keyboardMoveDistance: 50,
+          wheelZoomDistanceFactor: 100,
+          pinchZoomDistanceFactor: 100,
+        }}
+        thumbnails={{
+          position: 'bottom',
+          width: 120,
+          height: 80,
+          border: 1,
+          borderRadius: 4,
+          padding: 4,
+          gap: 16,
+        }}
+        render={{
+          iconPrev: () => (
+            <span className="yarl__button yarl__button_prev">❮</span>
+          ),
+          iconNext: () => (
+            <span className="yarl__button yarl__button_next">❯</span>
+          ),
+          iconClose: () => (
+            <span className="yarl__button yarl__button_close">✕</span>
+          ),
+          slideHeader: () => null, // Убираем заголовок сверху
+          slideFooter: (props) => {
+            const slide = props.slide as LightboxSlide;
+            return (
+              <div
+                className="yarl__slide_title text-center py-4"
                 style={{
-                  boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                  width: '100%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  color: 'white',
+                  padding: '15px 0',
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="white"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            {/* Содержимое модального окна */}
-            <div className="p-6 overflow-y-auto flex-grow">
-              <div className="flex flex-col md:flex-row gap-6">
-                {/* Изображение */}
-                <div className="md:w-2/3 relative">
-                  <div
-                    className="relative w-full h-[400px] md:h-[500px]"
-                    style={{
-                      backgroundColor: 'transparent',
-                    }}
-                  >
-                    <Image
-                      src={selectedArtwork.url}
-                      alt={selectedArtwork.title}
-                      fill
-                      style={{ objectFit: 'contain' }}
-                      className="rounded-md"
-                    />
-                  </div>
-                </div>
-
-                {/* Информация о картине */}
-                <div
-                  className="md:w-1/3 p-6"
-                  style={{
-                    backgroundImage:
-                      'url(/imagefon/background-of-the-picture-description.png)',
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    color: 'white',
-                  }}
-                >
-                  <Typography variant="body1" className="mb-4">
-                    <strong className="text-white">Автор:</strong>{' '}
-                    <span className="text-white font-medium">
-                      {selectedArtwork.author}
-                    </span>
-                  </Typography>
-                  <Typography variant="body1" className="mb-4">
-                    <strong className="text-white">Размер:</strong>{' '}
-                    <span className="text-white font-medium">
-                      {selectedArtwork.size}
-                    </span>
-                  </Typography>
-                  <Typography variant="body1" className="mb-4">
-                    <strong className="text-white">Цена:</strong>{' '}
-                    <span className="text-white font-medium">
-                      {selectedArtwork.price} ₽
-                    </span>
-                  </Typography>
-                </div>
+                <h3 className="text-xl font-bold mb-2">{slide.title}</h3>
+                <p>{slide.description}</p>
               </div>
-            </div>
-
-            {/* Футер модального окна */}
-            <div className="border-t border-purple-300 p-4 flex justify-end">
-              <button
-                onClick={handleClose}
-                className="px-6 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 focus:outline-none transition-colors duration-200 cursor-pointer"
-                style={{
-                  border: '1px solid #e0e0e0',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+            );
+          },
+        }}
+      />
     </div>
   );
 }
