@@ -2,7 +2,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef } from 'react';
 
 const artists = [
   { name: 'Ройо (Royo)', image: '/user/royo.jpg' },
@@ -13,75 +12,14 @@ const artists = [
 ];
 
 export default function HomePage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-
-  // Обработчик движения мыши
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!imageContainerRef.current) return;
-
-    const { left, top, width, height } =
-      imageContainerRef.current.getBoundingClientRect();
-
-    // Вычисляем относительное положение мыши внутри контейнера (от -1 до 1)
-    const x = ((e.clientX - left) / width - 0.5) * 2;
-    const y = ((e.clientY - top) / height - 0.5) * 2;
-
-    // Плавное обновление позиции
-    setMousePosition({ x, y });
-  };
-
   return (
     <section
       className="flex flex-col items-center justify-center min-h-screen py-10 bg-[url('/styles/pattern.png')] bg-cover bg-center bg-no-repeat"
-      style={{ position: 'relative', zIndex: -5 }}
+      style={{ position: 'relative', zIndex: 5 }}
     >
-      {/* Главное изображение с эффектом движения */}
-      <div
-        ref={imageContainerRef}
-        className="relative w-full max-w-3xl mx-auto mb-12 overflow-hidden rounded-lg shadow-2xl"
-        style={{
-          height: '400px',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.1)',
-          zIndex: -1, // Отрицательный z-index, чтобы изображение было под занавесками
-          position: 'relative', // Убедимся, что position установлен для работы z-index
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <div
-          className="absolute inset-0 transition-transform duration-200 ease-out"
-          style={{
-            transform: isHovering
-              ? `translate(${mousePosition.x * -20}px, ${
-                  mousePosition.y * -20
-                }px) scale(1.08)`
-              : 'translate(0, 0) scale(1)',
-            transformOrigin: 'center',
-            transition: isHovering
-              ? 'transform 0.2s ease-out'
-              : 'transform 0.5s ease-in-out',
-          }}
-        >
-          <Image
-            src="/styles/home-image.jpg"
-            alt="Эксклюзивные картины"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center',
-              zIndex: -2, // Отрицательный z-index для изображения
-            }}
-            className="transition-all duration-300"
-          />
-        </div>
-      </div>
+      {/* Главное изображение с эффектом движения перенесено в Navbar */}
 
-      <div className="max-w-4xl mx-auto text-center px-6">
+      <div className="max-w-4xl mx-auto text-center px-6 relative z-10 text-white">
         <div className="space-y-8">
           <div>
             <p className="text-2xl md:text-3xl font-serif text-gray-900 leading-relaxed">

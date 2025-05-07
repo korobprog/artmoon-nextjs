@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
+import HomeImage from './HomeImage';
 
 // Выносим хуки за пределы компонента в соответствии с правилами хуков React
 const useWindowSize = () => {
@@ -340,6 +341,16 @@ export default function Navbar() {
           isScrolled ? 'h-[80px]' : 'h-[230px]'
         }`}
       ></div>
+
+      {/* Добавляем HomeImage компонент сразу после навигации */}
+      {!isScrolled && (
+        <div
+          className="relative w-full max-w-4xl mx-auto"
+          style={{ marginTop: '-80px', zIndex: -10 }}
+        >
+          <HomeImage />
+        </div>
+      )}
     </>
   );
 }
