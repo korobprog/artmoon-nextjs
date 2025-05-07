@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function AuthorSignature() {
   return (
-    <section className="py-12 bg-[url('/public/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
+    <section className="py-12 bg-[url('/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-4xl mx-auto px-6">
         {/* Блок с подписью и фото */}
         <div>

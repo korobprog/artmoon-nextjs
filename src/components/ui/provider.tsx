@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ReactNode, useState, useEffect } from 'react';
 import createEmotionCache from '@/utils/createEmotionCache';
+import { CallbackForm } from '@/components/CallbackForm';
 
 // Создаем тему
 const theme = createTheme({
@@ -23,6 +24,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     // Создаем кэш только на клиенте
     setEmotionCache(createEmotionCache());
     setMounted(true);
+    console.log('Providers component mounted - this wraps all pages');
   }, []);
 
   // Если компонент не смонтирован, возвращаем только детей без стилизации
@@ -36,6 +38,7 @@ export default function Providers({ children }: { children: ReactNode }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
+        <CallbackForm />
       </ThemeProvider>
     </CacheProvider>
   );

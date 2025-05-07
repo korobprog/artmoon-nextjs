@@ -13,7 +13,7 @@ const artists = [
 
 export default function HomePage() {
   return (
-    <section className="flex items-center justify-center min-h-screen py-10 bg-[url('/public/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
+    <section className="flex items-center justify-center min-h-screen py-10 bg-[url('/styles/pattern.png')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-4xl mx-auto text-center px-6">
         <div className="space-y-8">
           <div>

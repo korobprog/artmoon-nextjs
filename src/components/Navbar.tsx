@@ -54,18 +54,16 @@ const useWindowSize = () => {
         isClient: true,
       };
 
-      console.log(
-        'Window resized:',
-        width,
-        'isSmallMobile:',
-        newIsSmallMobile,
-        'isMobile:',
-        isMobile
-      );
-
-      // Сохраняем размеры в localStorage
+      // Сохраняем размеры в localStorage, но не сохраняем позицию прокрутки
       try {
-        localStorage.setItem('windowSize', JSON.stringify({ width, height }));
+        localStorage.setItem(
+          'windowSize',
+          JSON.stringify({
+            width,
+            height,
+            // Не сохраняем scrollY, чтобы не влиять на позицию прокрутки при обновлении
+          })
+        );
       } catch (e) {
         console.error('Error saving to localStorage:', e);
       }
@@ -75,14 +73,9 @@ const useWindowSize = () => {
 
     // Вызываем сразу при монтировании
     handleResize();
-    console.log(
-      'useWindowSize effect executed, initial width:',
-      window.innerWidth
-    );
 
     window.addEventListener('resize', handleResize);
     return () => {
-      console.log('useWindowSize cleanup, removing resize listener');
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -101,6 +94,7 @@ const useScrollPosition = () => {
     // Функция для обработки события прокрутки
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      console.log('Scroll position changed:', currentScrollY);
       setScrollPosition({
         scrollY: currentScrollY,
         isScrolled: currentScrollY > 50, // Считаем, что прокрутка началась после 50px
@@ -112,6 +106,10 @@ const useScrollPosition = () => {
 
     // Вызываем сразу при монтировании
     handleScroll();
+    console.log(
+      'useScrollPosition effect executed, initial scrollY:',
+      window.scrollY
+    );
 
     // Удаляем слушатель при размонтировании
     return () => window.removeEventListener('scroll', handleScroll);
@@ -126,28 +124,16 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   // Получаем размеры окна и позицию прокрутки
-  const { isMobile, width, isClient } = useWindowSize();
+  const { isMobile, width } = useWindowSize();
   const { isScrolled, scrollY } = useScrollPosition();
 
   // Устанавливаем флаг mounted после первого рендера
   useEffect(() => {
     setMounted(true);
-    console.log(
-      'Navbar mounted, width:',
-      width,
-      'isMobile:',
-      isMobile,
-      'isClient:',
-      isClient
-    );
   }, []);
 
   // Логируем изменения ширины экрана
-  useEffect(() => {
-    if (mounted) {
-      console.log('Width changed:', width, 'isMobile:', isMobile);
-    }
-  }, [width, isMobile, mounted]);
+  useEffect(() => {}, [width, isMobile, mounted]);
 
   // Закрываем меню при прокрутке
   useEffect(() => {
@@ -185,9 +171,13 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center shadow-lg z-50 transition-all duration-500 ease-in-out ${
+        className={`fixed left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center shadow-lg z-50 transition-all duration-500 ease-in-out ${
           isScrolled ? 'h-[80px]' : 'h-[230px]'
         }`}
+        style={{
+          top: isScrolled ? 0 : '-21px',
+          transition: 'top 0.3s ease-in-out',
+        }}
       >
         {/* Основной контейнер с flex-структурой */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col relative">
@@ -211,16 +201,6 @@ export default function Navbar() {
                       transform:
                         width <= 516 ? 'translateY(-10px)' : 'translateY(10px)', // Поднимаем логотип для мобильного вида
                     }}
-                    ref={(el) => {
-                      if (el && mounted) {
-                        console.log(
-                          'Logo container (flex): width:',
-                          width,
-                          'isMobile:',
-                          width <= 516
-                        );
-                      }
-                    }}
                   >
                     <Image
                       key={width <= 516 ? 'mobile-logo' : 'desktop-logo'}
@@ -237,15 +217,6 @@ export default function Navbar() {
                         maxWidth: width <= 516 ? '430px' : '450px',
                       }}
                       priority
-                      onLoad={() => {
-                        console.log(
-                          'Logo image loaded (flex):',
-                          'type:',
-                          width <= 516 ? 'mobile' : 'desktop',
-                          'maxWidth:',
-                          width <= 516 ? '380px' : '400px'
-                        );
-                      }}
                     />
                   </div>
                 </Link>
@@ -306,7 +277,7 @@ export default function Navbar() {
                 <button
                   onClick={toggleDrawer}
                   aria-label="Toggle menu"
-                  className="text-white hover:text-purple-300 focus:outline-none ml-4"
+                  className="text-fuchsia-700 hover:text-purple-300 focus:outline-none ml-4"
                 >
                   {openDrawer ? (
                     <X className="h-10 w-10" />
@@ -333,7 +304,7 @@ export default function Navbar() {
             }`}
             style={{
               // Добавляем логирование позиции мобильного меню
-              top: isScrolled ? '80px' : '230px',
+              top: isScrolled ? '80px' : '200px',
             }}
           >
             <div className="flex justify-end pr-4">
