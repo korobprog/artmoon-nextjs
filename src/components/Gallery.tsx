@@ -85,7 +85,7 @@ export default function Gallery() {
   };
 
   return (
-    <div style={{ overflowX: 'hidden' }}>
+    <div style={{ overflowX: 'hidden', marginTop: '50px', paddingTop: '30px' }}>
       {/* Галерея */}
       <Grid
         container
@@ -97,7 +97,7 @@ export default function Gallery() {
       >
         {artworks.map((artwork) => (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          <Grid item xs={12} sm={6} md={4} key={artwork.id} {...({} as any)}>
+          <Grid key={artwork.id} size={{ xs: 12, sm: 6, md: 4 }}>
             <GalleryItem artwork={artwork} onClick={handleClickOpen} />
           </Grid>
         ))}

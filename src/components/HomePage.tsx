@@ -2,6 +2,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const artists = [
   { name: 'Ройо (Royo)', image: '/user/royo.jpg' },
@@ -19,7 +20,7 @@ export default function HomePage() {
     >
       {/* Главное изображение с эффектом движения перенесено в Navbar */}
 
-      <div className="max-w-4xl mx-auto text-center px-6 relative z-10 text-white">
+      <div className="top-20 max-w-4xl mx-auto text-center px-6 relative z-10 text-white">
         <div className="space-y-8">
           <div>
             <p className="text-2xl md:text-3xl font-serif text-gray-900 leading-relaxed">
@@ -172,16 +173,40 @@ export default function HomePage() {
               <span className="font-bold text-amber-700">
                 эксклюзивные цены
               </span>{' '}
-              ниже, чем в европейских и американских галереях.
+              ниже, чем в европейских и американских х.
             </p>
           </div>
 
-          <div>
+          <div className="mb-1 pb-1">
             <p className="text-xl md:text-2xl font-light text-gray-700 leading-relaxed">
               Каждая картина в нашей коллекции — это уникальное произведение,
               которое станет драгоценным украшением вашего интерьера и будет
               радовать вас долгие годы.
             </p>
+          </div>
+
+          {/* Кнопка для перехода на страницу галереи */}
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg shadow-lg hover:from-purple-700 hover:to-purple-900 transition-all duration-300 border-2 border-amber-400"
+            >
+              <span>Перейти в галерею</span>
+              <svg
+                className="w-6 h-6 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </Link>
           </div>
         </div>
       </div>

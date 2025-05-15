@@ -23,21 +23,13 @@ export default function Curtains({ children }: CurtainsProps) {
       setWindowHeight(window.innerHeight);
       setWindowWidth(width);
 
-      // Логируем размеры для отладки
-      console.log(`Window width: ${width}px`);
-      console.log(`51% of width: ${width * 0.51}px`);
-      console.log(
-        `Effective space with 35% transform: ${
-          width - width * 0.51 * 2 * 0.65
-        }px`
-      );
+      // Динамически корректируем translateX в зависимости от ширины экрана
 
       // Динамически корректируем translateX в зависимости от ширины экрана
       if (width < 900) {
         // Уменьшаем смещение при узких экранах
         const newTranslate = Math.max(10, 35 - (900 - width) / 20);
         setTranslateValue(newTranslate);
-        console.log(`Adjusted translate value: ${newTranslate}%`);
       } else {
         setTranslateValue(35);
       }
@@ -46,7 +38,6 @@ export default function Curtains({ children }: CurtainsProps) {
     const handleScroll = () => {
       // Скрываем верхние элементы, когда прокрутка превышает 100px
       const scrollY = window.scrollY;
-      console.log('Curtains scroll handler, scrollY:', scrollY);
       setShowTopCurtains(scrollY < 100);
 
       // Вычисляем значение трансформации для боковых шторок
@@ -63,21 +54,12 @@ export default function Curtains({ children }: CurtainsProps) {
       // Вычисляем значение трансформации (от 0 до maxTranslate)
       const newTranslateX = scrollPercent * maxTranslate;
 
-      console.log(
-        'Scroll Y:',
-        scrollY,
-        'Scroll Percent:',
-        scrollPercent,
-        'Curtain translate value:',
-        newTranslateX
-      );
       setCurtainTranslateX(newTranslateX);
     };
 
     // Устанавливаем начальные значения
     updateDimensions();
     handleScroll();
-    console.log('Curtains component mounted, initial scrollY:', window.scrollY);
 
     // Добавляем слушатели событий
     window.addEventListener('resize', updateDimensions);
@@ -100,7 +82,7 @@ export default function Curtains({ children }: CurtainsProps) {
       >
         <div className="relative w-full">
           {/* Левый верхний угол */}
-          <div className="absolute top-0 left-0">
+          <div className="absolute top-0" style={{ left: '-200px' }}>
             <Image
               src="/styles/curtains-top-left.png"
               alt="Top Left Curtain"
@@ -115,7 +97,7 @@ export default function Curtains({ children }: CurtainsProps) {
             />
           </div>
           {/* Правый верхний угол */}
-          <div className="absolute top-0 right-0">
+          <div className="absolute top-0" style={{ right: '-200px' }}>
             <Image
               src="/styles/curtains-top-right.png"
               alt="Top Right Curtain"
@@ -143,9 +125,10 @@ export default function Curtains({ children }: CurtainsProps) {
               width={300}
               height={windowHeight || 1000}
               style={{
-                height: '100vh',
-                width: 'auto',
+                height: '49vh',
+                width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
                 maxWidth: '25vw',
+                objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
                 transform: `translateX(-${curtainTranslateX}%)`,
                 transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
               }}
@@ -166,9 +149,10 @@ export default function Curtains({ children }: CurtainsProps) {
               width={300}
               height={windowHeight || 1000}
               style={{
-                height: '100vh',
-                width: 'auto',
+                height: '39vh',
+                width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
                 maxWidth: '25vw',
+                objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
                 transform: `translateX(${curtainTranslateX}%)`,
                 transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
               }}

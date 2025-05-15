@@ -24,7 +24,6 @@ export default function Providers({ children }: { children: ReactNode }) {
     // Создаем кэш только на клиенте
     setEmotionCache(createEmotionCache());
     setMounted(true);
-    console.log('Providers component mounted - this wraps all pages');
   }, []);
 
   // Если компонент не смонтирован, возвращаем только детей без стилизации

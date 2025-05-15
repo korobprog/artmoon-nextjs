@@ -28,34 +28,24 @@ export default function ClientNavbar() {
     // Сбрасываем позицию прокрутки при монтировании компонента
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
-      console.log('Scroll position reset to top');
     }
   }, []);
 
   useEffect(() => {
     setMounted(true);
-    console.log('ClientNavbar mounted, pathname:', pathname);
-    console.log('Initial scroll position:', window.scrollY);
 
-    // Логируем сохраненные данные из localStorage
+    // Проверяем сохраненные данные из localStorage
     try {
-      const savedSize = localStorage.getItem('windowSize');
-      if (savedSize) {
-        console.log(
-          'Saved window size from localStorage:',
-          JSON.parse(savedSize)
-        );
-      }
-    } catch (e) {
-      console.error('Error reading from localStorage:', e);
+      localStorage.getItem('windowSize');
+    } catch {
+      // Ошибка чтения из localStorage
     }
   }, [pathname]);
 
   // Логируем при размонтировании
   useEffect(() => {
     return () => {
-      console.log('ClientNavbar unmounting, pathname:', pathname);
-      console.log('Final scroll position:', window.scrollY);
+      // Очистка при размонтировании
     };
   }, [pathname]);
 

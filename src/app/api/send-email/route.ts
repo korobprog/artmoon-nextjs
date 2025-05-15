@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     // Проверяем подключение к SMTP
     await transporter
       .verify()
-      .then(() => console.log('SMTP подключение успешно'))
+      .then(() => {})
       .catch((error) => {
         console.error('Ошибка подключения SMTP:', error);
         throw new Error('Ошибка подключения к почтовому серверу');
@@ -61,8 +61,7 @@ export async function POST(request: Request) {
     };
 
     // Отправляем письмо
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Письмо отправлено:', info.messageId);
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
       { success: true, message: 'Заявка успешно отправлена' },

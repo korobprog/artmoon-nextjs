@@ -43,7 +43,6 @@ export function CallbackForm() {
         throw new Error(errorData.message || 'Ошибка при отправке формы');
       }
 
-      console.log('Форма успешно отправлена');
       setShowSuccess(true);
       setIsFormOpen(false);
       setName('');
@@ -53,7 +52,6 @@ export function CallbackForm() {
         setShowSuccess(false);
       }, 3000);
     } catch (err) {
-      console.error('Ошибка отправки формы:', err);
       setError(
         err instanceof Error ? err.message : 'Произошла ошибка при отправке'
       );

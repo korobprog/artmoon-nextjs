@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import HomeImage from './HomeImage';
+import { usePathname } from 'next/navigation';
 
 // Выносим хуки за пределы компонента в соответствии с правилами хуков React
 const useWindowSize = () => {
@@ -95,7 +96,6 @@ const useScrollPosition = () => {
     // Функция для обработки события прокрутки
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      console.log('Scroll position changed:', currentScrollY);
       setScrollPosition({
         scrollY: currentScrollY,
         isScrolled: currentScrollY > 50, // Считаем, что прокрутка началась после 50px
@@ -107,10 +107,6 @@ const useScrollPosition = () => {
 
     // Вызываем сразу при монтировании
     handleScroll();
-    console.log(
-      'useScrollPosition effect executed, initial scrollY:',
-      window.scrollY
-    );
 
     // Удаляем слушатель при размонтировании
     return () => window.removeEventListener('scroll', handleScroll);
@@ -123,10 +119,14 @@ export default function Navbar() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname(); // Получаем текущий путь
 
   // Получаем размеры окна и позицию прокрутки
   const { isMobile, width } = useWindowSize();
   const { isScrolled, scrollY } = useScrollPosition();
+
+  // Проверяем, находимся ли мы на домашней странице
+  const isHomePage = pathname === '/';
 
   // Устанавливаем флаг mounted после первого рендера
   useEffect(() => {
@@ -342,8 +342,8 @@ export default function Navbar() {
         }`}
       ></div>
 
-      {/* Добавляем HomeImage компонент сразу после навигации */}
-      {!isScrolled && (
+      {/* Добавляем HomeImage компонент только на домашней странице */}
+      {!isScrolled && isHomePage && (
         <div
           className="relative w-full max-w-4xl mx-auto"
           style={{ marginTop: '-80px', zIndex: -10 }}
