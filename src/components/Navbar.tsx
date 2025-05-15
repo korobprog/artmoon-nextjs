@@ -235,8 +235,8 @@ export default function Navbar() {
                 top: '50%',
               }}
             >
-              <h1 className="text-white text-2xl md:text-3xl font-serif italic tracking-wider">
-                Art<span className="font-normal">«MOON»</span>
+              <h1 className="text-white text-2xl md:text-3xl font-georgia-italic tracking-wider">
+                Art<span className="font-georgia">«MOON»</span>
               </h1>
             </div>
 
@@ -249,7 +249,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       key={item.text}
-                      className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-xl font-bold py-2"
+                      className="text-white hover:text-purple-300 transition-colors duration-300 font-georgia-bold text-xl py-2"
                     >
                       {item.text}
                     </Link>
@@ -266,7 +266,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       key={item.text}
-                      className="text-white hover:text-purple-300 transition-colors duration-300 font-geist-sans text-xl font-bold py-2"
+                      className="text-white hover:text-purple-300 transition-colors duration-300 font-georgia-bold text-xl py-2"
                     >
                       {item.text}
                     </Link>
@@ -324,7 +324,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     key={item.text}
-                    className="text-white hover:text-purple-300 px-4 py-3 text-lg font-geist-sans font-medium transition-colors duration-300"
+                    className="text-white hover:text-purple-300 px-4 py-3 text-lg font-georgia transition-colors duration-300"
                     onClick={() => setOpenDrawer(false)} // Close menu when clicking on a link
                   >
                     {item.text}

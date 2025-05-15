@@ -23,10 +23,10 @@ export default function HomePage() {
       <div className="top-20 max-w-4xl mx-auto text-center px-6 relative z-10 text-white">
         <div className="space-y-8">
           <div>
-            <p className="text-2xl md:text-3xl font-serif text-gray-900 leading-relaxed">
+            <p className="text-2xl md:text-3xl font-georgia-bold text-gray-900 leading-relaxed">
               Уважаемые дамы и господа!
             </p>
-            <p className="text-xl md:text-2xl font-light text-gray-700 mt-4 italic">
+            <p className="text-xl md:text-2xl font-georgia-italic text-gray-700 mt-4">
               Art Boutique «MOON» предлагает Вашему вниманию авторские картины
               современных испанских и итальянских художников.
             </p>
@@ -35,14 +35,14 @@ export default function HomePage() {
             <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-8"></div>
           </div>
           <div>
-            <p className="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed bg-gradient-to-r from-gray-50 to-amber-50 p-6 rounded-xl shadow-sm">
+            <p className="text-xl md:text-2xl font-georgia text-gray-800 leading-relaxed bg-gradient-to-r from-gray-50 to-amber-50 p-6 rounded-xl shadow-sm">
               Более 20 лет мы сотрудничаем напрямую с европейскими художниками и
               обладаем эксклюзивными правами представлять их работы в России.
             </p>
           </div>
 
           <div>
-            <p className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+            <p className="text-xl md:text-2xl font-georgia-bold text-gray-800 mb-2">
               Мы рады возможности предложить Вам картины художников с мировым
               именем:
             </p>
@@ -61,7 +61,7 @@ export default function HomePage() {
                           className="object-cover"
                         />
                       </div>
-                      <p className="text-center text-sm font-geist-sans text-black">
+                      <p className="text-center text-sm font-georgia text-black">
                         {artist.name}
                       </p>
                     </div>
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl font-light text-gray-700 italic border-l-4 border-amber-500 pl-4 py-2">
+            <p className="text-lg md:text-xl font-georgia-italic text-gray-700 border-l-4 border-amber-500 pl-4 py-2">
               &quot;Наши выставки проходили в Московской Городской Думе, Мэрии
               Москвы, Крокус-Экспо и других престижных площадках.&quot;
             </p>
@@ -111,7 +111,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div className="p-3 bg-gradient-to-r from-amber-50 to-amber-100">
-                      <p className="text-center text-gray-800 font-medium">
+                      <p className="text-center text-gray-800 font-georgia">
                         {image.title}
                       </p>
                     </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
 
           <div className="bg-white p-6 rounded-xl shadow-md">
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-black">
-              <span className="text-xl font-bold text-amber-700 bg-gradient-to-r from-amber-50 to-amber-100 px-4 py-2 rounded-lg shadow-sm">
+              <span className="text-xl font-georgia-bold text-amber-700 bg-gradient-to-r from-amber-50 to-amber-100 px-4 py-2 rounded-lg shadow-sm">
                 Каждая картина имеет
               </span>
               <div className="flex items-center">
@@ -141,7 +141,7 @@ export default function HomePage() {
                     d="M5 13l4 4L19 7"
                   ></path>
                 </svg>
-                <span className="text-lg font-medium text-neutral-800">
+                <span className="text-lg font-georgia text-neutral-800">
                   Сертификаты подлинности
                 </span>
               </div>
@@ -160,7 +160,7 @@ export default function HomePage() {
                     d="M5 13l4 4L19 7"
                   ></path>
                 </svg>
-                <span className="text-lg font-medium text-neutral-800">
+                <span className="text-lg font-georgia text-neutral-800">
                   Испанский багет
                 </span>
               </div>
@@ -168,9 +168,9 @@ export default function HomePage() {
           </div>
 
           <div>
-            <p className="text-xl md:text-2xl font-medium text-gray-900 bg-gradient-to-r from-amber-100 to-amber-50 p-6 rounded-xl">
+            <p className="text-xl md:text-2xl font-georgia text-gray-900 bg-gradient-to-r from-amber-100 to-amber-50 p-6 rounded-xl">
               Мы предлагаем{' '}
-              <span className="font-bold text-amber-700">
+              <span className="font-georgia-bold text-amber-700">
                 эксклюзивные цены
               </span>{' '}
               ниже, чем в европейских и американских х.
@@ -178,7 +178,7 @@ export default function HomePage() {
           </div>
 
           <div className="mb-1 pb-1">
-            <p className="text-xl md:text-2xl font-light text-gray-700 leading-relaxed">
+            <p className="text-xl md:text-2xl font-georgia text-gray-700 leading-relaxed">
               Каждая картина в нашей коллекции — это уникальное произведение,
               которое станет драгоценным украшением вашего интерьера и будет
               радовать вас долгие годы.
@@ -186,7 +186,7 @@ export default function HomePage() {
           </div>
 
           {/* Кнопка для перехода на страницу галереи */}
-          <div className="mt-10 flex justify-center">
+          <div className="mt-20 mb-20 flex justify-center">
             <Link
               href="/gallery"
               className="inline-flex items-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg shadow-lg hover:from-purple-700 hover:to-purple-900 transition-all duration-300 border-2 border-amber-400"
@@ -207,6 +207,101 @@ export default function HomePage() {
                 ></path>
               </svg>
             </Link>
+          </div>
+
+          {/* Галерея фотографий с художниками и выставками */}
+          <div className="mt-10 mb-20">
+            <div className="w-full">
+              <h2 className="text-2xl font-georgia-bold text-center mb-8 text-[#8a5d9e]">
+                Фото с художниками и с некоторых наших выставок
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+                {[
+                  {
+                    id: 1,
+                    url: '/image-exhibitions/034.jpg',
+                    title: 'Выставка в Мэрии 2006 г. С Никасом Сафроновым',
+                  },
+                  {
+                    id: 2,
+                    url: '/image-exhibitions/Untitled-3.jpg',
+                    title: 'С Ройо (слева)',
+                  },
+                  {
+                    id: 3,
+                    url: '/image-exhibitions/Untitled-4.jpg',
+                    title: 'С Хавьером Мулио (справа)',
+                  },
+                  {
+                    id: 4,
+                    url: '/image-exhibitions/Untitled-5.jpg',
+                    title: 'С Соледад Фернандез',
+                  },
+                ].map((photo) => (
+                  <div
+                    key={photo.id}
+                    className="photo-item relative cursor-pointer"
+                  >
+                    <div className="frame relative">
+                      {/* Рамка */}
+                      <div
+                        className="frame-border absolute top-0 left-0 w-full h-full z-10"
+                        style={{
+                          backgroundImage:
+                            'url(/styles/artists-gallery-frame.png)',
+                          backgroundSize: '100% 100%',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      ></div>
+
+                      {/* Изображение */}
+                      <div className="image-container relative pt-[100%]">
+                        <Image
+                          src={photo.url}
+                          alt={photo.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          style={{
+                            objectFit: 'cover',
+                            padding: '15px',
+                          }}
+                          className="hover:opacity-90 transition-opacity"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Подпись к фото */}
+                    <div className="photo-title text-center mt-2 mb-6 px-2 text-sm font-georgia">
+                      {photo.title}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Кнопка для перехода на страницу выставок */}
+              <div className="mt-10 flex justify-center">
+                <Link
+                  href="/artists#exhibition"
+                  className="inline-flex items-center px-6 py-3 text-lg font-bold text-white bg-gradient-to-r from-amber-600 to-amber-800 rounded-lg shadow-lg hover:from-amber-700 hover:to-amber-900 transition-all duration-300 border-2 border-purple-400"
+                >
+                  <span>Смотреть все фото</span>
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

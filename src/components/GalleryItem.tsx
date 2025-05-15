@@ -91,19 +91,23 @@ export default function GalleryItem({ artwork, onClick }: GalleryItemProps) {
           }}
         >
           <div className="mb-1 text-center">
-            <strong className="text-white">{artwork.title}</strong>
+            <strong className="text-white font-georgia-bold">
+              {artwork.title}
+            </strong>
           </div>
           <div className="mb-0.5">
-            <strong className="text-white">Автор:</strong>{' '}
-            <span className="text-white">{artwork.author}</span>
+            <strong className="text-white font-georgia-bold">Автор:</strong>{' '}
+            <span className="text-white font-georgia">{artwork.author}</span>
           </div>
           <div className="mb-0.5">
-            <strong className="text-white">Размер:</strong>{' '}
-            <span className="text-white">{artwork.size}</span>
+            <strong className="text-white font-georgia-bold">Размер:</strong>{' '}
+            <span className="text-white font-georgia">{artwork.size}</span>
           </div>
           <div className="mb-0.5">
-            <strong className="text-white">Цена:</strong>{' '}
-            <span className="text-white font-bold">{artwork.price} ₽</span>
+            <strong className="text-white font-georgia-bold">Цена:</strong>{' '}
+            <span className="text-white font-georgia-bold">
+              {artwork.price} ₽
+            </span>
           </div>
         </div>
       </div>

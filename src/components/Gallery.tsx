@@ -85,7 +85,15 @@ export default function Gallery() {
   };
 
   return (
-    <div style={{ overflowX: 'hidden', marginTop: '50px', paddingTop: '30px' }}>
+    <div
+      style={{
+        overflowX: 'hidden',
+        marginTop: '80px',
+        paddingTop: '40px',
+        marginBottom: '80px',
+        paddingBottom: '40px',
+      }}
+    >
       {/* Галерея */}
       <Grid
         container
@@ -161,8 +169,10 @@ export default function Gallery() {
                   padding: '15px 0',
                 }}
               >
-                <h3 className="text-xl font-bold mb-2">{slide.title}</h3>
-                <p>{slide.description}</p>
+                <h3 className="text-xl font-georgia-bold mb-2">
+                  {slide.title}
+                </h3>
+                <p className="font-georgia">{slide.description}</p>
               </div>
             );
           },

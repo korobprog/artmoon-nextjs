@@ -108,7 +108,7 @@ const YandexMap: React.FC<YandexMapProps> = ({
             iconCaption: 'Галерея Art Moon',
             balloonContentHeader: 'Галерея Art Moon',
             balloonContentBody: `
-            <div style="color: #5c4f3d; font-family: Georgia, serif;">
+            <div style="color: #5c4f3d; font-family: 'Georgia', serif; font-weight: normal;">
               <p>Центр Международной Торговли</p>
               <p>Краснопресненская набережная 12, вход №1</p>
               <p>(через гостиницу Plaza Garden), улица Молл</p>
@@ -157,7 +157,7 @@ const YandexMap: React.FC<YandexMapProps> = ({
             alignItems: 'center',
           }}
         >
-          <span>Загрузка карты...</span>
+          <span className="font-georgia">Загрузка карты...</span>
         </div>
       ) : (
         // Контейнер для карты

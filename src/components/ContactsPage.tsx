@@ -9,7 +9,7 @@ import ImageSlider from '@/components/ImageSlider';
 export default function ContactsPage() {
   return (
     <>
-      <h1 className="text-3xl font-bold mb-8 text-center text-[#8a5d9e]">
+      <h1 className="text-3xl font-georgia-bold mb-8 text-center text-[#8a5d9e]">
         Контакты
       </h1>
       <div className="mt-8 mb-8">
@@ -22,28 +22,27 @@ export default function ContactsPage() {
             backgroundImage: 'url(/styles/pattern.png)',
             backgroundRepeat: 'repeat',
             color: '#5c4f3d',
-            fontFamily: 'Georgia, serif',
           }}
         >
-          <h2 className="text-2xl font-bold mb-6 text-center italic">
+          <h2 className="text-2xl font-georgia-bold-italic mb-6 text-center">
             Уважаемые дамы и господа,
           </h2>
 
-          <p className="mb-8 text-lg text-center">
+          <p className="mb-8 text-lg text-center font-georgia">
             Мы можем доставить понравившиеся Вам работы в любое удобное для Вас
             время и место, чтобы Вы могли окончательно убедиться в своем выборе,
             наглядно посмотрев, как картины дополняют Ваш интерьер и принять
             окончательное решение о покупке.
           </p>
 
-          <p className="mb-8 text-lg text-center">
+          <p className="mb-8 text-lg text-center font-georgia">
             Данная услуга бесплатная и предоставляется для Вашего удобства и
             экономии времени.
           </p>
 
           <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-3">НАШ АДРЕС:</h2>
-            <p className="text-lg">
+            <h2 className="text-xl font-georgia-bold mb-3">НАШ АДРЕС:</h2>
+            <p className="text-lg font-georgia">
               • Открытая выставочная экспозиция находится в Центре Международной
               Торговли, Краснопресненская набережная 12, вход №1, (через
               гостиницу Plaza Garden), улица Молл (доступ ежедневно и
@@ -55,7 +54,7 @@ export default function ContactsPage() {
           <ContactInfo />
 
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-3">Как нас найти:</h2>
+            <h2 className="text-xl font-georgia-bold mb-3">Как нас найти:</h2>
             <YandexMap
               height="400px"
               className="w-full rounded-lg shadow-md mt-2"

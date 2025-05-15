@@ -1,19 +1,38 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export default function HomeImage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Определяем мобильное устройство при монтировании компонента
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth <= 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    // Проверяем при первой загрузке
+    checkMobile();
+
+    // Добавляем слушатель изменения размера окна
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Обработчик движения мыши
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!imageContainerRef.current) return;
+    if (!containerRef.current) return;
 
     const { left, top, width, height } =
-      imageContainerRef.current.getBoundingClientRect();
+      containerRef.current.getBoundingClientRect();
 
     // Вычисляем относительное положение мыши внутри контейнера (от -1 до 1)
     const x = ((e.clientX - left) / width - 0.5) * 2;
@@ -25,14 +44,14 @@ export default function HomeImage() {
 
   return (
     <div
-      ref={imageContainerRef}
+      ref={containerRef}
       className="relative w-full max-w-4xl mx-auto mb-0 mt-1 overflow-hidden rounded-lg shadow-2xl"
       style={{
         height: '600px',
         boxShadow: '0 10px 25px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.1)',
-        zIndex: -1, // Уменьшаем z-index, чтобы изображение было ниже всех слоев
-        position: 'relative', // Убедимся, что position установлен для работы z-index
-        willChange: 'transform, opacity, z-index', // Оптимизация рендеринга
+        zIndex: -1,
+        position: 'relative',
+        willChange: 'transform, opacity, z-index',
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
@@ -41,17 +60,19 @@ export default function HomeImage() {
       <div
         className="absolute inset-0 transition-transform duration-200 ease-out"
         style={{
-          transform: isHovering
-            ? `translate(${mousePosition.x * -20}px, ${
-                mousePosition.y * -20
-              }px) scale(1.08)`
-            : 'translate(0, 0) scale(1)',
+          transform:
+            isHovering && !isMobile
+              ? `translate(${mousePosition.x * -20}px, ${
+                  mousePosition.y * -20
+                }px) scale(1.08)`
+              : 'translate(0, 0) scale(1)',
           transformOrigin: 'center',
           transition: isHovering
             ? 'transform 0.2s ease-out'
             : 'transform 0.5s ease-in-out',
         }}
       >
+        {/* Основное изображение */}
         <Image
           src="/styles/home-image.jpg"
           alt="Эксклюзивные картины"
@@ -61,8 +82,7 @@ export default function HomeImage() {
           style={{
             objectFit: 'cover',
             objectPosition: 'center',
-            zIndex: -2, // Уменьшаем z-index для изображения
-            willChange: 'transform, opacity, z-index', // Оптимизация рендеринга
+            zIndex: -1,
           }}
           className="transition-all duration-300"
         />

@@ -1,0 +1,235 @@
+<div class="artists-gallery">
+			<h2>Фото с художниками и с некоторых наших выставок</h2>			
+							<ul class="photos-list">				
+								
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/034.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/034.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/034.jpg">
+							</a>
+							<div class="photo-title">Выставка в Мэрии 2006 г. С Никасом Сафроновым</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-3.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-3.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-3.jpg">
+							</a>
+							<div class="photo-title">С Ройо (слева)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-4.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-4.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-4.jpg">
+							</a>
+							<div class="photo-title">С Хавьером Мулио (справа)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-5.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-5.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-5.jpg">
+							</a>
+							<div class="photo-title">С Соледад Фернандез</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-6.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-6.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-6.jpg">
+							</a>
+							<div class="photo-title">С Наварро Монтллор (справа)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-11.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-11.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-11.jpg">
+							</a>
+							<div class="photo-title">С Маркосом Эстеве (слева)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-21.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-21.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-21.jpg">
+							</a>
+							<div class="photo-title">С Хесусом Наварро (справа)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-31.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-31.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-31.jpg">
+							</a>
+							<div class="photo-title">С Элиосом Хисберт (справа)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-12.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-12.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-12.jpg">
+							</a>
+							<div class="photo-title">С Франческо Санчесом (слева)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-22.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-22.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-22.jpg">
+							</a>
+							<div class="photo-title">С Альфредо Наварро (слева)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-32.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-32.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-32.jpg">
+							</a>
+							<div class="photo-title">С Висентэ Эспарса (слева)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Амедео-Борсоне_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Амедео-Борсоне_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Амедео-Борсоне_.jpg">
+							</a>
+							<div class="photo-title">С Амедео Борсоне</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Андреа-Марини-Пасквале-Вуотто-1_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Андреа-Марини-Пасквале-Вуотто-1_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Андреа-Марини-Пасквале-Вуотто-1_.jpg">
+							</a>
+							<div class="photo-title">С Андреа Марини (Пасквале Вуотто)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Армандо-Романо_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Армандо-Романо_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Армандо-Романо_.jpg">
+							</a>
+							<div class="photo-title">С Армандо Романо</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Г.ГолиаРосарио-Палумбо_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Г.ГолиаРосарио-Палумбо_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Г.ГолиаРосарио-Палумбо_.jpg">
+							</a>
+							<div class="photo-title">С Г.Голиа (Росарио Палумбо)</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Джузеппе-Каччиапуотти_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Джузеппе-Каччиапуотти_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Джузеппе-Каччиапуотти_.jpg">
+							</a>
+							<div class="photo-title">С Джузеппе Каччиапуотти</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/С-Франческо-Таммаро_.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/С-Франческо-Таммаро_.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/С-Франческо-Таммаро_.jpg">
+							</a>
+							<div class="photo-title">С Франческо Таммаро</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-2.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-2.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-2.jpg">
+							</a>
+							<div class="photo-title">Выставка “TOP LINE”в Крокус Сити</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/Untitled-1.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/Untitled-1.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/Untitled-1.jpg">
+							</a>
+							<div class="photo-title">2006 г. Выставка в Московской Мэрии</div>
+						</li>
+						
+					 			
+						<li><a rel="wpsimplegallery_group_8" class="cboxElement" href="https://www.art-moon.ru/wp-content/uploads/01.jpg">
+								<!-- <div class="image" style="background-image:url('https://www.art-moon.ru/wp-content/uploads/01.jpg');"></div>-->
+								<div class="frame-top"></div>
+								<div class="frame-bottom"></div>
+								<img src="https://www.art-moon.ru/wp-content/uploads/01.jpg">
+							</a>
+							<div class="photo-title">Выставка в Московской городской Думе. С народным артистом Российской Федерации, депутатом Мосгордумы Герасимовым Евгением Владимировичем</div>
+						</li>
+						
+					 				</ul>
+						
+		</div>
+	</main>
+</div>
+
+	<footer class="footer center">
+		<div class="footer__top-border">
+			<nav class="footer-menu">
+				<ul>
+					<li><a href="/">Главная</a></li>
+					<li><a href="/художники/">Художники</a></li>
+					<li><a href="/галерея/">Галерея</a></li>
+					<li><a href="/контакты/">Контакты</a></li>
+					<li><a href="tel:+74956425335">тел.+7 (495) 642-53-35</a></li>
+					<li><a target="_blank" href="mailto:info@art-moon.ru">info@art-moon.ru</a></li>
+				</ul>
+			</nav>
+			<span class="copyrights">&copy; Art-moon.ru</span>
+		</div>
+	</footer>
+	<div class="curtains-corner-left">&nbsp;</div>
+	<div class="curtains-corner-right">&nbsp;</div>
+</div>
+
+<script src="https://www.art-moon.ru/wp-content/themes/artmoon/js/functions.js"></script>
+<script src="https://www.art-moon.ru/wp-content/themes/artmoon/js/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>

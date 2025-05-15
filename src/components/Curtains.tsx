@@ -82,7 +82,7 @@ export default function Curtains({ children }: CurtainsProps) {
       >
         <div className="relative w-full">
           {/* Левый верхний угол */}
-          <div className="absolute top-0" style={{ left: '-200px' }}>
+          <div className="absolute top-0" style={{ left: '-90px' }}>
             <Image
               src="/styles/curtains-top-left.png"
               alt="Top Left Curtain"
@@ -97,7 +97,7 @@ export default function Curtains({ children }: CurtainsProps) {
             />
           </div>
           {/* Правый верхний угол */}
-          <div className="absolute top-0" style={{ right: '-200px' }}>
+          <div className="absolute top-0" style={{ right: '-90px' }}>
             <Image
               src="/styles/curtains-top-right.png"
               alt="Top Right Curtain"
@@ -163,7 +163,7 @@ export default function Curtains({ children }: CurtainsProps) {
       </div>
 
       {/* Основное содержимое */}
-      <div className="relative z-[5] mx-auto px-[10vw]">{children}</div>
+      <div className="relative z-[5] mx-auto px-[1vw]">{children}</div>
     </div>
   );
 }
