@@ -42,10 +42,11 @@ export default function FooterPage() {
               className="text-white hover:text-yellow-400 transition-colors duration-300 font-geist-sans text-sm sm:text-base flex items-center justify-center sm:justify-end whitespace-nowrap"
             >
               <span className="ml-2 inline-flex items-center">
-                Телефон и WhatsApp
+                Телефон и WhatsApp:
               </span>
-              <span className="mr-2 inline-flex items-center"></span>
-              +7 (495) 642-53-35
+              <span className="ml-2 inline-flex items-center">
+                +7 (495) 642-53-35
+              </span>
             </a>
             <a
               href="mailto:info@art-moon.ru"

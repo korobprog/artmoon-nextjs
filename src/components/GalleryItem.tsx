@@ -86,7 +86,8 @@ export default function GalleryItem({ artwork, onClick }: GalleryItemProps) {
             flexDirection: 'column',
             justifyContent: 'center',
             height: '100%',
-            marginTop: '15px',
+            marginTop:
+              '0px' /* Изменено с 15px на 0px, чтобы поднять текст выше */,
           }}
         >
           <div className="mb-1 text-center">

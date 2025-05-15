@@ -37,7 +37,7 @@ export default function ImageSlider() {
   }
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -52,7 +52,7 @@ export default function ImageSlider() {
           disableOnInteraction: false,
         }}
         loop={true}
-        className="w-full h-[250px] sm:h-[350px] md:h-[450px]"
+        className="w-full h-[450px] sm:h-[550px] md:h-[650px]"
       >
         {artworks.map((artwork) => (
           <SwiperSlide key={artwork.id} className="relative">
@@ -66,16 +66,6 @@ export default function ImageSlider() {
                 priority={artwork.id === artworks[0].id}
                 className="transition-opacity duration-500"
               />
-
-              {/* Информация о картине */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#8a5d9e]/70 text-white p-3 sm:p-4 backdrop-blur-sm">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">
-                  {artwork.title}
-                </h3>
-                <p className="text-xs sm:text-sm md:text-base">
-                  {artwork.author}, {artwork.size}
-                </p>
-              </div>
             </div>
           </SwiperSlide>
         ))}
