@@ -1,12 +1,13 @@
 @import 'tailwindcss';
 
 /* Объявление шрифтов Georgia */
+/* Оптимизированная загрузка шрифтов */
 @font-face {
   font-family: 'Georgia';
   src: url('/font/georgia.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: swap; /* Показывает запасной шрифт до загрузки основного */
 }
 
 @font-face {
@@ -33,6 +34,18 @@
   font-display: swap;
 }
 
+/* Стили для плавного появления контента после загрузки шрифтов */
+html:not(.fonts-loaded) {
+  /* Стили до загрузки шрифтов */
+  font-family: Arial, sans-serif; /* Запасной системный шрифт */
+}
+
+html.fonts-loaded body {
+  /* Плавное появление контента после загрузки шрифтов */
+  opacity: 1 !important;
+  transition: opacity 0.3s ease-in;
+}
+
 :root {
   --foreground: #171717;
   --bg-image: url('/styles/pattern.png'); /* Убедитесь, что файл в public/styles/pattern.png */
@@ -51,6 +64,27 @@ body {
   font-family: 'Georgia', serif;
   position: relative;
   z-index: 0;
+  /* Начальное состояние для плавного появления */
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+/* Когда JS загружен и выполнен, стиль перезаписывается */
+.js-loaded body {
+  opacity: 1;
+}
+
+/* Стили для блокировки прокрутки при показе превью */
+body.overflow-hidden {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+/* Стили для скрытия контента до проверки превью */
+body.visibility-hidden {
+  visibility: hidden;
 }
 
 /* Добавляем классы для Tailwind */

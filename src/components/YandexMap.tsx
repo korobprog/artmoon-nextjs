@@ -50,93 +50,134 @@ const YandexMap: React.FC<YandexMapProps> = ({
   useEffect(() => {
     setIsMounted(true);
 
-    if (!window.ymaps) {
+    // Проверяем, загружен ли уже API
+    if (typeof window !== 'undefined' && !window.ymaps) {
       const apiKey = process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY;
-      const script = document.createElement('script');
-      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${apiKey}&lang=ru_RU`;
-      script.async = true;
-      script.onload = () => setIsLoaded(true);
-      document.body.appendChild(script);
 
-      return () => {
-        document.body.removeChild(script);
-      };
-    } else {
+      // Создаем уникальный ID для скрипта, чтобы избежать дублирования
+      const scriptId = 'yandex-maps-script';
+
+      // Проверяем, существует ли уже скрипт с таким ID
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = `https://api-maps.yandex.ru/2.1/?apikey=${apiKey}&lang=ru_RU`;
+        script.async = true;
+        script.onload = () => {
+          console.log('Yandex Maps API loaded successfully');
+          setIsLoaded(true);
+        };
+        script.onerror = (error) => {
+          console.error('Error loading Yandex Maps API:', error);
+        };
+        document.body.appendChild(script);
+      }
+    } else if (typeof window !== 'undefined' && window.ymaps) {
+      console.log('Yandex Maps API already loaded');
       setIsLoaded(true);
     }
+
+    // Очистка при размонтировании
+    return () => {
+      // Не удаляем скрипт при размонтировании, чтобы избежать проблем с повторной загрузкой
+    };
   }, []);
 
   // Инициализация карты после загрузки API
   useEffect(() => {
-    if (isMounted && isLoaded && mapRef.current && window.ymaps) {
-      // Дожидаемся полной загрузки API
-      window.ymaps.ready(() => {
-        // Создаем экземпляр карты
-        // Проверяем, что mapRef.current не null
-        if (!mapRef.current) return;
+    if (
+      isMounted &&
+      isLoaded &&
+      mapRef.current &&
+      typeof window !== 'undefined' &&
+      window.ymaps
+    ) {
+      try {
+        // Дожидаемся полной загрузки API
+        window.ymaps.ready(() => {
+          try {
+            // Создаем экземпляр карты
+            // Проверяем, что mapRef.current не null
+            if (!mapRef.current) return;
 
-        // Создаем экземпляр карты с минимальным интерфейсом
-        const map = new window.ymaps.Map(mapRef.current, {
-          center: coordinates,
-          zoom: 15,
-          controls: ['zoomControl', 'fullscreenControl'], // Только необходимые элементы управления
-          suppressMapOpenBlock: true, // Убираем кнопку "Создать свою карту"
-          copyrightLogoVisible: true, // Скрываем логотип Яндекса
-          copyrightProvidersVisible: true, // Скрываем информацию о провайдерах данных
-          copyrightUaVisible: false, // Скрываем ссылку на пользовательское соглашение
-        });
+            // Проверяем, что Map является конструктором
+            if (typeof window.ymaps.Map !== 'function') {
+              console.error('window.ymaps.Map is not a constructor');
+              return;
+            }
 
-        mapInstanceRef.current = map;
+            // Создаем экземпляр карты с минимальным интерфейсом
+            const map = new window.ymaps.Map(mapRef.current, {
+              center: coordinates,
+              zoom: 15,
+              controls: ['zoomControl', 'fullscreenControl'], // Только необходимые элементы управления
+              suppressMapOpenBlock: true, // Убираем кнопку "Создать свою карту"
+              copyrightLogoVisible: true, // Скрываем логотип Яндекса
+              copyrightProvidersVisible: true, // Скрываем информацию о провайдерах данных
+              copyrightUaVisible: false, // Скрываем ссылку на пользовательское соглашение
+            });
 
-        // Настраиваем элементы управления
-        const zoomControl = new window.ymaps.control.ZoomControl({
-          options: {
-            position: {
-              right: 10,
-              top: 10,
-            },
-          },
-        });
+            mapInstanceRef.current = map;
 
-        map.controls.add(zoomControl);
-        // Убрали создание и добавление searchControl
+            // Настраиваем элементы управления
+            const zoomControl = new window.ymaps.control.ZoomControl({
+              options: {
+                position: {
+                  right: 10,
+                  top: 10,
+                },
+              },
+            });
 
-        // Создаем метку
-        const placemark = new window.ymaps.Placemark(
-          coordinates,
-          {
-            iconCaption: 'Галерея Art Moon',
-            balloonContentHeader: 'Галерея Art Moon',
-            balloonContentBody: `
-            <div style="color: #5c4f3d; font-family: 'Georgia', serif; font-weight: normal;">
-              <p>Центр Международной Торговли</p>
-              <p>Краснопресненская набережная 12, вход №1</p>
-              <p>(через гостиницу Plaza Garden), улица Молл</p>
-              <p>Ежедневно с 10:00 до 18:00</p>
-            </div>
-          `,
-            hintContent: 'Галерея Art Moon',
-          },
-          {
-            // Используем собственное SVG-изображение
-            iconLayout: 'default#image',
-            iconImageHref:
-              '/location-pin-navigation-destination-maps-svgrepo-com.svg',
-            iconImageSize: [40, 40], // Размер иконки в пикселях
-            iconImageOffset: [-20, -40], // Смещение иконки относительно точки привязки
-            draggable: false, // Запрещаем перетаскивание метки
+            map.controls.add(zoomControl);
+            // Убрали создание и добавление searchControl
+
+            // Создаем метку
+            const placemark = new window.ymaps.Placemark(
+              coordinates,
+              {
+                iconCaption: 'Галерея Art Moon',
+                balloonContentHeader: 'Галерея Art Moon',
+                balloonContentBody: `
+                <div style="color: #5c4f3d; font-family: 'Georgia', serif; font-weight: normal;">
+                  <p>Центр Международной Торговли</p>
+                  <p>Краснопресненская набережная 12, вход №1</p>
+                  <p>(через гостиницу Plaza Garden), улица Молл</p>
+                  <p>Ежедневно с 10:00 до 18:00</p>
+                </div>
+              `,
+                hintContent: 'Галерея Art Moon',
+              },
+              {
+                // Используем собственное SVG-изображение
+                iconLayout: 'default#image',
+                iconImageHref:
+                  '/location-pin-navigation-destination-maps-svgrepo-com.svg',
+                iconImageSize: [40, 40], // Размер иконки в пикселях
+                iconImageOffset: [-20, -40], // Смещение иконки относительно точки привязки
+                draggable: false, // Запрещаем перетаскивание метки
+              }
+            );
+
+            // Добавляем метку на карту
+            map.geoObjects.add(placemark);
+          } catch (error) {
+            console.error('Error initializing Yandex Map:', error);
           }
-        );
-
-        // Добавляем метку на карту
-        map.geoObjects.add(placemark);
-      });
+        });
+      } catch (error) {
+        console.error('Error in ymaps.ready():', error);
+      }
     }
 
     // Очистка при размонтировании компонента
     return () => {
       if (mapInstanceRef.current) {
-        mapInstanceRef.current.destroy();
+        try {
+          mapInstanceRef.current.destroy();
+        } catch (error) {
+          console.error('Error destroying map instance:', error);
+        }
         mapInstanceRef.current = null;
       }
     };
