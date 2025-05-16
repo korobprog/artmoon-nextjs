@@ -182,7 +182,7 @@ Stowe,VT./Simic Galleries,La Jolla,CA.
   return (
     <>
       <ClientNavbar />
-      <div className="container mx-auto px-4 py-8 md:py-16 mt-[150px] md:mt-[-300px]">
+      <div className="container mx-auto px-4 py-8 md:py-16 mt-[-250px] md:mt-[-300px]">
         <h1 className="text-3xl font-georgia-bold mb-8 text-center text-[#8a5d9e]">
           Художники
         </h1>

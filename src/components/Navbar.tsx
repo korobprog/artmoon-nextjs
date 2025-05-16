@@ -72,7 +72,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`fixed left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center shadow-lg z-[100] transition-all duration-500 ease-in-out ${
+        className={`fixed left-0 w-full bg-[url('/styles/menu-bg.png')] bg-repeat-x bg-center z-[100] transition-all duration-500 ease-in-out ${
           isScrolled ? 'h-[80px]' : 'h-[230px]'
         }`}
         style={navbarStyle}
