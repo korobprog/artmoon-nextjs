@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import useWindowSize from '../hooks/useWindowSize';
 
 interface CurtainsProps {
   children: React.ReactNode;
 }
 
 export default function Curtains({ children }: CurtainsProps) {
+  const { isMobile } = useWindowSize();
   const [windowHeight, setWindowHeight] = useState(0);
   // windowWidth используется только для расчетов в useEffect
   const [, setWindowWidth] = useState(0); // Убираем неиспользуемую переменную
@@ -114,53 +116,57 @@ export default function Curtains({ children }: CurtainsProps) {
         </div>
       </div>
 
-      {/* Левая занавеска */}
-      <div className="fixed top-0 left-0 h-full z-[10] pointer-events-none">
-        <div className="relative h-full">
-          {/* Левая занавеска */}
-          <div className="absolute top-0 left-0">
-            <Image
-              src="/styles/curt-left.png"
-              alt="Left Curtain"
-              width={300}
-              height={windowHeight || 1000}
-              style={{
-                height: '49vh',
-                width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
-                maxWidth: '25vw',
-                objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
-                transform: `translateX(-${curtainTranslateX}%)`,
-                transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
-              }}
-              priority
-            />
+      {/* Левая занавеска - скрываем на мобильных устройствах */}
+      {!isMobile && (
+        <div className="fixed top-0 left-0 h-full z-[10] pointer-events-none">
+          <div className="relative h-full">
+            {/* Левая занавеска */}
+            <div className="absolute top-0 left-0">
+              <Image
+                src="/styles/curt-left.png"
+                alt="Left Curtain"
+                width={300}
+                height={windowHeight || 1000}
+                style={{
+                  height: '49vh',
+                  width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
+                  maxWidth: '25vw',
+                  objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
+                  transform: `translateX(-${curtainTranslateX}%)`,
+                  transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
+                }}
+                priority
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Правая занавеска */}
-      <div className="fixed top-0 right-0 h-full z-[10] pointer-events-none">
-        <div className="relative h-full">
-          {/* Правая занавеска */}
-          <div className="absolute top-0 right-0">
-            <Image
-              src="/styles/curt-right.png"
-              alt="Right Curtain"
-              width={300}
-              height={windowHeight || 1000}
-              style={{
-                height: '39vh',
-                width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
-                maxWidth: '25vw',
-                objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
-                transform: `translateX(${curtainTranslateX}%)`,
-                transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
-              }}
-              priority
-            />
+      {/* Правая занавеска - скрываем на мобильных устройствах */}
+      {!isMobile && (
+        <div className="fixed top-0 right-0 h-full z-[10] pointer-events-none">
+          <div className="relative h-full">
+            {/* Правая занавеска */}
+            <div className="absolute top-0 right-0">
+              <Image
+                src="/styles/curt-right.png"
+                alt="Right Curtain"
+                width={300}
+                height={windowHeight || 1000}
+                style={{
+                  height: '39vh',
+                  width: 'auto', // Сохраняем автоматическую ширину для поддержания соотношения сторон
+                  maxWidth: '25vw',
+                  objectFit: 'contain', // Добавляем objectFit для сохранения соотношения сторон
+                  transform: `translateX(${curtainTranslateX}%)`,
+                  transition: 'transform 0.5s ease-out', // Увеличиваем время перехода для большей плавности
+                }}
+                priority
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Основное содержимое */}
       <div className="relative z-[5] mx-auto px-[1vw]">{children}</div>

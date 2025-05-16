@@ -15,7 +15,7 @@ export default function ContactsPage() {
       <div className="mt-8 mb-8">
         <ImageSlider />
       </div>
-      <div className="container mx-auto px-4 py-16 mt-[1px]">
+      <div className="container mx-auto px-4 py-16 mt-[10px]">
         <div
           className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-lg"
           style={{
