@@ -78,13 +78,13 @@ export default function Curtains({ children }: CurtainsProps) {
     <div className="relative min-h-screen overflow-x-hidden">
       {/* Верхние ажурные элементы */}
       <div
-        className={`fixed top-0 left-0 w-full z-[11] pointer-events-none transition-opacity duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[5] pointer-events-none transition-opacity duration-300 ${
           showTopCurtains ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <div className="relative w-full">
           {/* Левый верхний угол */}
-          <div className="absolute top-0" style={{ left: '-90px' }}>
+          <div className="absolute top-0" style={{ left: '-500px' }}>
             <Image
               src="/styles/curtains-top-left.png"
               alt="Top Left Curtain"
@@ -99,7 +99,7 @@ export default function Curtains({ children }: CurtainsProps) {
             />
           </div>
           {/* Правый верхний угол */}
-          <div className="absolute top-0" style={{ right: '-90px' }}>
+          <div className="absolute top-0" style={{ right: '-500px' }}>
             <Image
               src="/styles/curtains-top-right.png"
               alt="Top Right Curtain"
