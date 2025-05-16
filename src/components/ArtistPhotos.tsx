@@ -43,7 +43,10 @@ export default function ArtistPhotos() {
               </div>
 
               {/* Подпись к фото */}
-              <div className="photo-title text-center mt-2 mb-6 px-2 text-sm font-georgia">
+              <div
+                className="photo-title text-center mt-2 mb-6 px-2 text-sm font-georgia"
+                style={{ color: '#5c4f3d' }}
+              >
                 {photo.title}
               </div>
             </div>

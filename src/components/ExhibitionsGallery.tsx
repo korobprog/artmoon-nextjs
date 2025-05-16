@@ -86,6 +86,26 @@ export default function ExhibitionsGallery() {
         Фото с художниками и с некоторых наших выставок
       </h2>
 
+      <div
+        className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-lg mb-10"
+        style={{
+          backgroundImage: 'url(/styles/pattern.png)',
+          backgroundRepeat: 'repeat',
+          color: '#5c4f3d',
+        }}
+      >
+        <h2 className="text-2xl font-georgia-bold-italic mb-6 text-center">
+          Уважаемые дамы и господа,
+        </h2>
+
+        <p className="mb-8 text-lg text-center font-georgia">
+          Мы можем доставить понравившиеся Вам работы в любое удобное для Вас
+          время и место, чтобы Вы могли окончательно убедиться в своем выборе,
+          наглядно посмотрев, как картины дополняют Ваш интерьер и принять
+          окончательное решение о покупке.
+        </p>
+      </div>
+
       <div className="photos-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
         {exhibitions.map((exhibition) => (
           <div
@@ -121,7 +141,10 @@ export default function ExhibitionsGallery() {
             </div>
 
             {/* Подпись к фото */}
-            <div className="photo-title text-center mt-2 mb-6 px-2 text-sm font-georgia">
+            <div
+              className="photo-title text-center mt-2 mb-6 px-2 text-sm font-georgia"
+              style={{ color: '#5c4f3d' }}
+            >
               {exhibition.title}
             </div>
           </div>

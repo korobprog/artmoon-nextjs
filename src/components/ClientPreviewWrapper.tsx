@@ -9,11 +9,21 @@ const PreviewPage = dynamic(() => import('@/components/PreviewPage'), {
   loading: () => null,
 });
 
-export default function ClientPreviewWrapper() {
+interface ClientPreviewWrapperProps {
+  children?: React.ReactNode;
+}
+
+export default function ClientPreviewWrapper({
+  children,
+}: ClientPreviewWrapperProps) {
   // Состояние для блокировки рендеринга основного контента
   const [isPreviewChecked, setIsPreviewChecked] = useState(false);
   // Состояние для отслеживания среды Vercel
   const [isVercelEnv, setIsVercelEnv] = useState(false);
+  // Состояние для отслеживания завершения показа превью
+  const [isPreviewClosed, setIsPreviewClosed] = useState(false);
+  // Состояние для отслеживания первого посещения
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
 
   // Эффект для установки флага проверки превью и определения среды Vercel
   useEffect(() => {
@@ -24,10 +34,7 @@ export default function ClientPreviewWrapper() {
 
     setIsVercelEnv(isVercel);
 
-    // Устанавливаем флаг, что проверка превью выполнена
-    setIsPreviewChecked(true);
-
-    // Добавляем класс к body для предотвращения прокрутки во время показа превью
+    // Проверяем localStorage для определения первого посещения
     const checkLocalStorage = () => {
       try {
         // Проверяем localStorage и sessionStorage
@@ -43,10 +50,17 @@ export default function ClientPreviewWrapper() {
 
         if (!hasVisited || isExpired) {
           document.body.classList.add('overflow-hidden');
+          setIsFirstVisit(true);
+        } else {
+          setIsFirstVisit(false);
         }
       } catch (error) {
         console.error('Error checking localStorage:', error);
+        setIsFirstVisit(false);
       }
+
+      // Устанавливаем флаг, что проверка превью выполнена
+      setIsPreviewChecked(true);
     };
 
     checkLocalStorage();
@@ -57,6 +71,7 @@ export default function ClientPreviewWrapper() {
     if (isVercel) {
       safetyTimer = setTimeout(() => {
         document.body.classList.remove('overflow-hidden');
+        setIsPreviewClosed(true);
         console.log('Vercel safety timer: removed overflow-hidden');
       }, 15000); // 15 секунд максимум для Vercel
     }
@@ -82,11 +97,27 @@ export default function ClientPreviewWrapper() {
     };
   }, [isPreviewChecked]);
 
-  // Передаем информацию о среде Vercel в PreviewPage
-  return (
-    <PreviewPage
-      onPreviewClosed={() => document.body.classList.remove('overflow-hidden')}
-      isVercelEnvironment={isVercelEnv}
-    />
-  );
+  // Обработчик закрытия превью
+  const handlePreviewClosed = () => {
+    document.body.classList.remove('overflow-hidden');
+    setIsPreviewClosed(true);
+  };
+
+  // Если проверка не выполнена, не отображаем ничего
+  if (!isPreviewChecked) {
+    return null;
+  }
+
+  // Если это первое посещение и превью еще не закрыто, показываем только превью
+  if (isFirstVisit && !isPreviewClosed) {
+    return (
+      <PreviewPage
+        onPreviewClosed={handlePreviewClosed}
+        isVercelEnvironment={isVercelEnv}
+      />
+    );
+  }
+
+  // В противном случае показываем основной контент
+  return <>{children}</>;
 }

@@ -30,9 +30,10 @@ export default function RootLayout({
         <ImageOptimizer />
         <ScriptOptimizer />
         <Providers>
-          <ClientPreviewWrapper />
-          <ClientNavbar />
-          <CurtainsContent>{children}</CurtainsContent>
+          <ClientPreviewWrapper>
+            <ClientNavbar />
+            <CurtainsContent>{children}</CurtainsContent>
+          </ClientPreviewWrapper>
         </Providers>
         <YandexMetrika />
       </body>

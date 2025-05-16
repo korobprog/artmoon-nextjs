@@ -1,6 +1,7 @@
 'use client';
 
 import React, { memo } from 'react';
+import Link from 'next/link';
 import { NAVBAR_STYLES } from './navbarStyles';
 
 interface NavbarTitleProps {
@@ -26,9 +27,14 @@ const NavbarTitle: React.FC<NavbarTitleProps> = ({ isScrolled }) => {
       className="absolute left-0 w-full flex justify-center items-center transition-all duration-500 ease-in-out"
       style={titleStyle}
     >
-      <h1 className="text-white text-2xl md:text-3xl font-georgia-italic tracking-wider">
-        Art<span className="font-georgia">«MOON»</span>
-      </h1>
+      <Link
+        href="/"
+        className="cursor-pointer hover:text-purple-300 transition-colors duration-300"
+      >
+        <h1 className="text-white text-2xl md:text-3xl font-georgia-italic tracking-wider">
+          Art<span className="font-georgia">«MOON»</span>
+        </h1>
+      </Link>
     </div>
   );
 };

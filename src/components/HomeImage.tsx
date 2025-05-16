@@ -49,9 +49,9 @@ export default function HomeImage() {
       style={{
         height: '600px',
         boxShadow: '0 10px 25px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.1)',
-        zIndex: -1,
+        zIndex: -20,
         position: 'relative',
-        willChange: 'transform, opacity, z-index',
+        willChange: 'transform, opacity',
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
@@ -82,7 +82,7 @@ export default function HomeImage() {
           style={{
             objectFit: 'cover',
             objectPosition: 'center',
-            zIndex: -1,
+            zIndex: -25,
           }}
           className="transition-all duration-300"
         />

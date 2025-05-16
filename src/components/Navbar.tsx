@@ -121,7 +121,7 @@ function Navbar() {
       {!isScrolled && isHomePage && (
         <div
           className="relative w-full max-w-4xl mx-auto"
-          style={{ marginTop: '-80px', zIndex: -10 }}
+          style={{ marginTop: '-80px', zIndex: -30 }}
         >
           <LazyHomeImage />
         </div>
