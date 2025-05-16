@@ -54,93 +54,112 @@ export default function AuthorSignature() {
   };
 
   return (
-    <section className="py-12 relative overflow-hidden">
-      {/* Фоновое видео */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-        {/* Фоновое изображение (показывается до загрузки видео или при ошибке) */}
-        <div
-          className="absolute inset-0 bg-[url('/styles/pattern.png')] bg-cover bg-center bg-no-repeat"
+    <div className="relative">
+      {/* Рамка над видео */}
+      <div className="w-full overflow-visible pointer-events-none flex justify-center mb-1">
+        <Image
+          src="/styles/home-image-border.png"
+          alt="Декоративная рамка"
+          width={1200}
+          height={50}
           style={{
-            opacity: isVideoLoaded && !isVideoError ? 0.15 : 0.5,
-            transition: 'opacity 0.5s ease-in-out',
+            width: '100%',
+            height: 'auto',
+            maxWidth: '1200px',
           }}
-        ></div>
-
-        {/* Видео фон */}
-        {shouldLoadVideo && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/styles/pattern.png"
-            onLoadedData={handleVideoLoaded}
-            onError={handleVideoError}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity:
-                isVideoLoaded && !isVideoError ? (isMobile ? 0.6 : 0.8) : 0,
-              transition: 'opacity 0.5s ease-in-out',
-              mixBlendMode: 'screen',
-              filter: 'contrast(1.1) brightness(1.2)',
-            }}
-          >
-            <source src="/video/fon.mp4" type="video/mp4" />
-          </video>
-        )}
+          priority
+        />
       </div>
 
-      {/* Контент */}
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        {/* Блок с подписью и фото */}
-        <div>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:items-start">
-            {/* Левая часть с рамкой и подписью */}
-            <div className="flex flex-col items-center md:order-2 md:self-center md:-mt-8 md:z-20 relative">
-              {/* Рамка - скрыта на мобильных, прижата к левому краю на десктопе */}
-            </div>
-            <div className="text-center">
-              <div className="font-serif text-gray-800 leading-relaxed relative">
-                <div className="absolute inset-0 bg-white/30 backdrop-blur-sm -m-2 rounded-lg"></div>
-                <div className="relative">
-                  <p className="text-lg md:text-xl italic mb-6">С уважением,</p>
-                  <p className="text-base md:text-lg mb-6">
-                    руководитель арт-бутика
-                  </p>
-                  <p className="text-lg md:text-xl font-medium text-amber-800 mb-6">
-                    «MOON»
-                  </p>
-                  <p className="text-xl md:text-2xl font-semibold border-b border-amber-700 inline-block pb-1">
-                    Максим Милохов
-                  </p>
+      <section className="py-12 relative overflow-hidden">
+        {/* Фоновое видео */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+          {/* Фоновое изображение (показывается до загрузки видео или при ошибке) */}
+          <div
+            className="absolute inset-0 bg-[url('/styles/pattern.png')] bg-cover bg-center bg-no-repeat"
+            style={{
+              opacity: isVideoLoaded && !isVideoError ? 0.15 : 0.5,
+              transition: 'opacity 0.5s ease-in-out',
+            }}
+          ></div>
+
+          {/* Видео фон */}
+          {shouldLoadVideo && (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/styles/pattern.png"
+              onLoadedData={handleVideoLoaded}
+              onError={handleVideoError}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                opacity:
+                  isVideoLoaded && !isVideoError ? (isMobile ? 0.4 : 0.6) : 0,
+                transition: 'opacity 0.5s ease-in-out',
+                filter: 'contrast(1.1) brightness(1.2)',
+              }}
+            >
+              <source src="/video/fon.mp4" type="video/mp4" />
+            </video>
+          )}
+        </div>
+
+        {/* Контент */}
+        <div className="max-w-4xl mx-auto px-6 relative z-60">
+          {/* Блок с подписью и фото */}
+          <div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:items-start">
+              {/* Левая часть с рамкой и подписью */}
+              <div className="flex flex-col items-center md:order-2 md:self-center md:-mt-8 md:z-20 relative">
+                {/* Рамка - скрыта на мобильных, прижата к левому краю на десктопе */}
+              </div>
+              <div className="text-center">
+                <div className="font-serif text-gray-800 leading-relaxed relative">
+                  <div className="absolute inset-0 bg-white/30 backdrop-blur-sm -m-2 rounded-lg"></div>
+                  <div className="relative">
+                    <p className="text-lg md:text-xl italic mb-6">
+                      С уважением,
+                    </p>
+                    <p className="text-base md:text-lg mb-6">
+                      руководитель арт-бутика
+                    </p>
+                    <p className="text-lg md:text-xl font-medium text-amber-800 mb-6">
+                      «MOON»
+                    </p>
+                    <p className="text-xl md:text-2xl font-semibold border-b border-amber-700 inline-block pb-1">
+                      Максим Милохов
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* Правая часть с фото в рамке */}
-            <div className="relative w-64 h-auto mt-6 md:mt-0 md:order-1">
-              <div className="relative">
-                <Image
-                  src="/styles/author-frame.png"
-                  alt="Frame"
-                  className="w-full h-auto absolute top-0 left-0 z-10"
-                  width={500}
-                  height={500}
-                  priority
-                />
-                <Image
-                  src="/user/aiam.jpg"
-                  alt="Максим Милохов"
-                  className="w-full h-auto object-cover relative z-0 p-4"
-                  width={500}
-                  height={500}
-                />
+              {/* Правая часть с фото в рамке */}
+              <div className="relative w-64 h-auto mt-6 md:mt-0 md:order-1">
+                <div className="relative">
+                  <Image
+                    src="/styles/author-frame.png"
+                    alt="Frame"
+                    className="w-full h-auto absolute top-0 left-0 z-10"
+                    width={500}
+                    height={500}
+                    priority
+                  />
+                  <Image
+                    src="/user/aiam.jpg"
+                    alt="Максим Милохов"
+                    className="w-full h-auto object-cover relative z-0 p-4"
+                    width={500}
+                    height={500}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
